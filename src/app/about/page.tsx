@@ -3,35 +3,41 @@ export default function About() {
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-4">About Knotes Central</h1>
       <p className="text-gray-700 dark:text-gray-300 mb-4">
-        Knotes Central is a comprehensive collection of academic resources for
-        RVCE. Our mission is to provide students with easy access to a wide
-        range of study materials, including notes, question papers, and lab
-        manuals, to help them excel in their academic pursuits.
+        Welcome to Knotes Central - where panic meets preparation! Born from the
+        age-old tradition of frantically searching for notes at 11 PM before
+        exams, we're your one-stop solution for all RVCE academic resources.
+        Because let's face it, your WhatsApp is already full of memes, and
+        there's no space for those PDFs!
       </p>
+
       <h2 className="text-2xl font-bold mb-2">Our Vision</h2>
       <p className="text-gray-700 dark:text-gray-300 mb-4">
-        We envision a world where every student has the resources they need to
-        succeed academically. By centralizing and organizing these resources, we
-        aim to make studying more efficient and effective for students at RVCE.
+        We envision a world where no student has to experience the existential
+        crisis of missing notes before exams. While we can't promise you'll
+        study early, we can at least ensure you have something to study when you
+        finally decide to start (probably the night before).
       </p>
+
       <h2 className="text-2xl font-bold mb-2">Our Team</h2>
       <p className="text-gray-700 dark:text-gray-300 mb-4">
-        Our team is composed of dedicated students and educators who are
-        passionate about education and technology. We work tirelessly to gather,
-        organize, and update the resources available on Knotes Central to ensure
-        they are accurate and up-to-date.
+        Our team consists of sleep-deprived students and caffeine-powered
+        educators who understand the struggle is real. Fueled by coffee and pure
+        desperation, we work tirelessly to keep Knotes Central running smoother
+        than your excuses for missing classes.
       </p>
+
       <h2 className="text-2xl font-bold mb-2">Contact Us</h2>
       <p className="text-gray-700 dark:text-gray-300">
-        If you have any questions, suggestions, or feedback, please feel free to{" "}
+        Found a bug? Missing notes? Or just want to share your exam horror
+        stories?{" "}
         <a
           href="/contact"
           className="text-blue-600 dark:text-blue-400 hover:underline"
         >
-          contact us
+          Drop us a line
         </a>
-        . We are always looking for ways to improve and would love to hear from
-        you.
+        ! We're always here (except during exams, obviously). Your feedback
+        helps us make Knotes Central better than your last-minute study plans.
       </p>
     </div>
   );
