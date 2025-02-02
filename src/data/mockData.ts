@@ -199,6 +199,8 @@ export const contributors: Contributors[] = [
     notes_contributed: 10,
     department: "Computer Science",
     year: 1,
+    description:
+      "John Doe is a student of Computer Science and Engineering at RV College of Engineering. He is a dedicated contributor to the notes database and has uploaded a variety of study materials for various subjects.",
   },
   {
     name: "Jane Doe",
@@ -206,6 +208,8 @@ export const contributors: Contributors[] = [
     notes_contributed: 5,
     department: "Electrical Engineering",
     year: 2,
+    description:
+      "Jane Doe is a student of Electrical Engineering at RV College of Engineering. She has contributed a significant number of notes for various subjects, including circuit theory and power systems.",
   },
   {
     name: "John Doe",
@@ -213,5 +217,7 @@ export const contributors: Contributors[] = [
     notes_contributed: 10,
     department: "Computer Science",
     year: 1,
+    description:
+      "John Doe is a student of Computer Science and Engineering at RV College of Engineering. He is a dedicated contributor to the notes database and has uploaded a variety of study materials for various subjects.",
   },
 ];

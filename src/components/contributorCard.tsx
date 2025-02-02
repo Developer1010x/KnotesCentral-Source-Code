@@ -31,6 +31,9 @@ export default function ContributorCard({
             <span className="font-medium">Year:</span> {contributor.year}
           </p>
         </div>
+        <p className="text-gray-600 dark:text-gray-300 text-sm mt-4">
+          {contributor.description}
+        </p>
       </div>
     </div>
   );

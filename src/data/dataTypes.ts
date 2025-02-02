@@ -33,4 +33,5 @@ export interface Contributors {
   department: string;
   year: number;
   notes_contributed: number;
+  description: string;
 }

@@ -22,10 +22,10 @@ export default function Contact() {
         <div className="text-center text-gray-600 dark:text-gray-400">
           <p className="mb-2">You can also reach us at:</p>
           <a
-            href="mailto:contact@knotescentral.com"
+            href="mailto:knotescentral@gmail.com"
             className="text-blue-600 dark:text-blue-400 hover:underline"
           >
-            contact@knotescentral.com
+            knotescentral@gmail.com
           </a>
         </div>
       </div>
