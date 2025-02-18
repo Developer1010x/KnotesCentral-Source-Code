@@ -2300,7 +2300,7 @@ export const departments: Department[] = [
 export const contributors: Contributors[] = [
   {
     name: "S Prajwall Narayana",
-    contribution: "Developer",
+    contribution: "Developer & GDrive",
     description: "",
     department: "Computer Science",
     year: 2025,
@@ -2308,7 +2308,7 @@ export const contributors: Contributors[] = [
   },
   {
     name: "Krishnatejaswi S",
-    contribution: "Developer & GDrive",
+    contribution: "Developer",
     description: "",
     department: "Computer Science",
     year: 2025,
