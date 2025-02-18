@@ -1,53 +1,25 @@
-# Knotes-Central 📚
+# Knotes-Central
+https://developer1010x.github.io/KnotesCentral/
 
-A one stop site for all your notes in RV College of Engineering.
-Yes we could not find our engineering notes 1 day before exams (duh !). To overcome this skill issue, we are gonna do a classic engineer move.
+A humble attempt to create a collaborative platform for students to share notes and resources.
 
-We are making a website where students can access all the notes for all the subjects in the college. (Provided someone among students has uploaded the notes)
+## Website Developers:
 
-## Why Knotes-Central? 🤔
+- [Developer1010x](https://developer1010x.github.io/PORTFOLIO/) V1 & Idea
 
-- Because searching for notes at 11 PM before exam is our cardio 🏃‍♂️
-- Your WhatsApp is already full of memes, no space for PDFs
-- Google Drive links expire faster than our motivation to study
-- That one friend who has all the notes is probably sleeping (how dare they!)
+- [KTS-o7](https://kts-o7.github.io) Refactoring and Updates
 
-## Features 🌟
+## Overview
 
-- Awesome Notes Dump (because we know you're procrastinating)
-- Search functionality (unlike that mess in your backpack)
-- Subject-wise organization (yes, we're more organized than your life)
-- Mobile-friendly (study from anywhere, even during those boring family functions)
-- Dark mode (because your future is already bright enough)
+Knotes-Central is a collaborative platform designed to help students share notes, resources, and past papers. The platform aims to make it easier for students to access the study materials they need and contribute their own resources to help their peers.
 
-## How to Contribute 🤝
+## Features
 
-1. Upload your notes (yes, those scribbles are welcome too)
-2. Share with your friends (spread knowledge, not rumors)
-3. Star this repo (it's free, just like our advice)
+- **User-Friendly Interface:** An intuitive design to easily navigate through different courses and resources.
+- **Collaborative Sharing:** Users can upload and share notes, question papers, and other study materials.
+- **Course Categorization:** Materials are organized based on courses, making it easy to find relevant resources.
+- **Search Functionality:** Quickly find specific notes or documents using the search feature.
+- **Open Drive Storage:** All materials are stored in an open drive for easy access.
 
-## Coming Soon 🚀
-
-- PDF previews (so you know what you're not going to read)
-- Rating system (rate notes, not your crush)
-
-## Disclaimer ⚠️
-
-This project was born out of pure desperation and too much caffeine. Any resemblance to actual organization is purely coincidental.
-
-Remember: Sharing notes won't make you fail, but not having them definitely might!
-
-## Tech Stack 💻
-
-Built with:
-
-- Love ❤️
-- Panic 😱
-- Coffee ☕
-- And oh yeah, some actual code too...
-
----
-
-Made with 💖 by students who understand the struggle is real.
-
-P.S.: If you're reading this the night before your exam, good luck! You'll need it. 🍀
+## Getting Started
+- Use RVCE EMail to access

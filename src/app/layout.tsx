@@ -2,6 +2,7 @@ import { Inter } from "next/font/google";
 import "./globals.css"; // Make sure this import is present
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -13,39 +14,6 @@ const themeInitScript = `
     document.documentElement.classList[theme === 'dark' ? 'add' : 'remove']('dark');
   })()
 `;
-
-// Icon components
-const SunIcon = () => (
-  <svg
-    className="w-5 h-5"
-    fill="none"
-    stroke="currentColor"
-    viewBox="0 0 24 24"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth={2}
-      d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
-    />
-  </svg>
-);
-
-const MoonIcon = () => (
-  <svg
-    className="w-5 h-5"
-    fill="none"
-    stroke="currentColor"
-    viewBox="0 0 24 24"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth={2}
-      d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
-    />
-  </svg>
-);
 
 // Add this with other icon components at the top
 const SearchIcon = () => (
@@ -82,12 +50,12 @@ export default function RootLayout({
             <div className="container py-4">
               <div className="flex items-center justify-between">
                 <h1 className="text-2xl md:text-3xl font-bold tracking-tight neon-text">
-                  <a
+                  <Link
                     href="/"
                     className="hover:text-[var(--neon-purple)] transition-colors"
                   >
                     Knotes Central
-                  </a>
+                  </Link>
                 </h1>
               </div>
               <p className="mt-2 text-sm text-opacity-80">
@@ -101,41 +69,41 @@ export default function RootLayout({
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between py-4 md:py-0 space-y-4 md:space-y-0">
                   {/* Main Navigation */}
                   <div className="flex flex-col md:flex-row gap-2">
-                    <a
+                    <Link
                       href="/"
                       className="nav-link hover:text-[var(--neon-blue)]"
                     >
                       Home
-                    </a>
-                    <a
+                    </Link>
+                    <Link
                       href="/contributors"
                       className="nav-link hover:text-[var(--neon-blue)]"
                     >
                       Contributors
-                    </a>
+                    </Link>
                   </div>
 
                   {/* Secondary Navigation */}
                   <div className="flex flex-col md:flex-row items-start md:items-center gap-2">
-                    <a
+                    <Link
                       href="/about"
                       className="nav-link hover:text-[var(--neon-purple)]"
                     >
                       About
-                    </a>
-                    <a
+                    </Link>
+                    <Link
                       href="/contact"
                       className="nav-link hover:text-[var(--neon-purple)]"
                     >
                       Contact
-                    </a>
-                    <a
+                    </Link>
+                    <Link
                       href="/search"
                       className="nav-link hover:text-[var(--neon-green)] flex items-center gap-1"
                     >
                       <SearchIcon />
                       <span>Search</span>
-                    </a>
+                    </Link>
                     <ThemeToggle />
                   </div>
                 </div>
@@ -151,15 +119,21 @@ export default function RootLayout({
                 © 2025 Knotes Central. All rights reserved.
               </p>
               <div className="flex flex-wrap justify-center gap-4">
-                <a href="/about" className="hover:text-[var(--neon-purple)]">
+                <Link href="/about" className="hover:text-[var(--neon-purple)]">
                   About
-                </a>
-                <a href="/contact" className="hover:text-[var(--neon-purple)]">
+                </Link>
+                <Link
+                  href="/contact"
+                  className="hover:text-[var(--neon-purple)]"
+                >
                   Contact
-                </a>
-                <a href="/privacy" className="hover:text-[var(--neon-purple)]">
+                </Link>
+                <Link
+                  href="/privacy"
+                  className="hover:text-[var(--neon-purple)]"
+                >
                   Privacy Policy
-                </a>
+                </Link>
               </div>
             </div>
           </footer>

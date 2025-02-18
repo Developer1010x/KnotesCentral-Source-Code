@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Privacy() {
   return (
     <div className="container mx-auto px-4 py-8">
@@ -50,12 +52,12 @@ export default function Privacy() {
           <h2 className="text-2xl font-bold mb-3">Contact Us</h2>
           <p>
             If you have any questions about our privacy policy, please{" "}
-            <a
+            <Link
               href="/contact"
               className="text-blue-600 dark:text-blue-400 hover:underline"
             >
               contact us
-            </a>
+            </Link>
             .
           </p>
         </section>

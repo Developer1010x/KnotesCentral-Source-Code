@@ -18,22 +18,22 @@ export default function ContributorCard({
             {contributor.name}
           </a>
           <span className="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-sm font-medium px-3 py-1 rounded-full">
-            {contributor.notes_contributed} notes
+            {contributor.contribution} {/* Displays the contribution type */}
           </span>
         </div>
-
         <div className="space-y-2">
           <p className="text-gray-600 dark:text-gray-300 text-sm">
-            <span className="font-medium">Department:</span>{" "}
-            {contributor.department}
+            <span className="font-medium">Description:</span> {contributor.description}
           </p>
-          <p className="text-gray-600 dark:text-gray-300 text-sm">
-            <span className="font-medium">Year:</span> {contributor.year}
-          </p>
+          <div className="space-y-2">
+            <p className="text-gray-600 dark:text-gray-300 text-sm">
+              <span className="font-medium">Department:</span> {contributor.department}
+            </p>
+            <p className="text-gray-600 dark:text-gray-300 text-sm">
+              <span className="font-medium">Year:</span> {contributor.year}
+            </p>
+          </div>
         </div>
-        <p className="text-gray-600 dark:text-gray-300 text-sm mt-4">
-          {contributor.description}
-        </p>
       </div>
     </div>
   );

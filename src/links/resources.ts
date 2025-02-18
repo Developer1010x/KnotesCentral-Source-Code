@@ -1,4 +1,5 @@
 import { Department, Contributors } from "../data/dataTypes";
+export type { Department, Contributors };
 
 /* Example of data to be added here */
 

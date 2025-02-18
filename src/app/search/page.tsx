@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { departments } from "../../data/mockData";
 import { useState, useMemo } from "react";
 
@@ -168,10 +168,10 @@ export default function SearchPage() {
       {searchQuery && searchResults.length === 0 && (
         <div className="text-center py-8">
           <p className="text-foreground/70">
-            No subjects found matching "{searchQuery}"
+            No subjects found matching &quot;{searchQuery}&quot;
           </p>
         </div>
       )}
     </div>
   );
-} 
+}

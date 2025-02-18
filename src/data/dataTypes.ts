@@ -29,9 +29,9 @@ export interface Note {
 
 export interface Contributors {
   name: string;
-  link: string;
+  contribution:"Developer" | "Notes" | "GDrive";
+  description: string;
   department: string;
   year: number;
-  notes_contributed: number;
-  description: string;
+  link: string;
 }

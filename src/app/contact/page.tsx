@@ -5,8 +5,9 @@ export default function Contact() {
       <div className="max-w-2xl mx-auto">
         <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-8 text-center">
           <p className="text-gray-700 dark:text-gray-300 mb-6">
-            Have questions, suggestions, or want to contribute? We'd love to
-            hear from you. Click the button below to fill out our contact form.
+            Have questions, suggestions, or want to contribute? We&apos;d love
+            to hear from you. Click the button below to fill out our contact
+            form.
           </p>
 
           <a
@@ -22,10 +23,10 @@ export default function Contact() {
         <div className="text-center text-gray-600 dark:text-gray-400">
           <p className="mb-2">You can also reach us at:</p>
           <a
-            href="mailto:knotescentral@gmail.com"
+            href="mailto:contact@knotescentral.com"
             className="text-blue-600 dark:text-blue-400 hover:underline"
           >
-            knotescentral@gmail.com
+            contact@knotescentral.com
           </a>
         </div>
       </div>
