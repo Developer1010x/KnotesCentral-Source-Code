@@ -29,7 +29,14 @@ export interface Note {
 
 export interface Contributors {
   name: string;
-  contribution:"Developer" | "Notes" | "GDrive";
+  contribution:
+    | "Developer"
+    | "Notes"
+    | "GDrive"
+    | "Developer & Notes"
+    | "Developer & GDrive"
+    | "Notes & GDrive"
+    | "Developer, Notes & GDrive";
   description: string;
   department: string;
   year: number;
