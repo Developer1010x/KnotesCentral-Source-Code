@@ -120,7 +120,7 @@ export default function About() {
           <li>
             <strong>Version 1:</strong>{" "}
             <Link
-              href="https://developer1100x.github.io/KnotesCentralV1.0/"
+              href="https://knotes-central-v3.github.io/KnotesCentralV1/"
               className="text-blue-600 dark:text-blue-400 hover:underline"
               target="_blank"
               rel="noopener noreferrer"
@@ -131,7 +131,7 @@ export default function About() {
           <li>
             <strong>Version 2:</strong>{" "}
             <Link
-              href="https://developer1010x.github.io/KnotesCentral/"
+              href="https://knotes-central-v3.github.io/KnotesCentralV2/"
               className="text-blue-600 dark:text-blue-400 hover:underline"
               target="_blank"
               rel="noopener noreferrer"
