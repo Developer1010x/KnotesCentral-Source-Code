@@ -2216,6 +2216,17 @@ export const departments: Department[] = [
                 subject_code: "",
               },
               {
+                name: " G form",
+                notes: [
+                  {
+                    title: "G form",
+                    type: "theory",
+                    link: "https://docs.google.com/forms/d/e/1FAIpQLSek3-e8OHFkYXfa6RajVYPwCa4JHeJnM1V4JAJim7d-3_XTIw/viewform",
+                  },
+                ],
+                subject_code: "",
+              },
+              {
                 name: "Syllabus Page",
                 notes: [
                   {
@@ -2241,7 +2252,7 @@ export const departments: Department[] = [
                 name: "Reddit Community",
                 notes: [
                   {
-                    title: "RVCE Reddit Page",
+                    title: "Knotes Reddit Page",
                     type: "theory",
                     link: "https://www.reddit.com/r/rvce/?rdt=63474",
                   },
@@ -2268,7 +2279,7 @@ export const departments: Department[] = [
   {
     name: "Previous Year Question Papers",
     description:
-      "Dear user,You can access through this RVCE link: PYQP within RVCE premises using college IP address, old semester examination question papers of both UG (RVCE autonomous) and PG (VTU) papers by giving appropriate keyword search. This can be accessed in any department & any system through college IP address ONLY so you gotta be connected to College WiFi.Note: Some of the subjects old question papers (both UG & PG) may not have been uploaded.If you are UNABLE to open the link, please follow the following procedure:Log on to www.rvce.edu.inClick on Library on the side of the web page Click on Dspace@rvce.",
+      "Dear user,You can access through this RVCE link: PYQP within RVCE premises using college IP address, old semester examination question papers of both UG (RVCE autonomous) and PG (VTU) papers by giving appropriate keyword search. This can be accessed in any department & any system through college IP address ONLY so you gotta be connected to College WiFi.Note: Some of the subjects old question papers (both UG & PG) may not have been uploaded.If you are UNABLE to open the link, please follow the following procedure:Log on to www.rvce.edu.inClick on Library on the side of the web page Click on Dspace@rvce. We can also access Pyqp from Drives linked within the following cards ",
 
     link: "/pyqp",
     years: [
@@ -2279,12 +2290,23 @@ export const departments: Department[] = [
             number: 0,
             subjects: [
               {
-                name: "All Subjects",
+                name: "All Subjects Server PYQP",
                 notes: [
                   {
                     title: "Previous Year Question Papers",
                     type: "theory",
                     link: "http://172.16.44.10:8080/jspui/handle/123456789/207",
+                  },
+                ],
+                subject_code: "",
+              },
+              {
+                name: "All Subjects Drive PYQP",
+                notes: [
+                  {
+                    title: "Previous Year Question Papers",
+                    type: "theory",
+                    link: "https://drive.google.com/drive/folders/1o4U3vd4hhzS0jjjuOvciEJkn1shjb9ab",
                   },
                 ],
                 subject_code: "",
@@ -2295,6 +2317,398 @@ export const departments: Department[] = [
       },
     ],
   },
+  {
+    name: "Year 1",
+    description:
+      "Ground Zero of RVCE Lol ",
+
+    link: "/1st_Year",
+    years: [
+      {
+        year: 1,
+        semesters: [
+          {
+            number: 10,
+            subjects: [
+              {
+                name: "1st Sem Drive Link",
+                notes: [
+                  {
+                    title: "P cycle",
+                    type: "theory",
+                    link: "https://drive.google.com/drive/folders/1EHqT2hTuaADcG-q5SKuMCY75scJP4AOH",
+                  },
+                  {
+                    title: "RVCE Physics Dept Website",
+                    type: "lab",
+                    link: "https://physicsrvce.wordpress.com",
+                  },
+                ],
+                subject_code: "Y01SM01",
+              },
+              {
+                name: "2nd Sem Drive Link",
+                notes: [
+                  {
+                    title: "C Cycle",
+                    type: "theory",
+                    link: "https://drive.google.com/drive/folders/1o4U3vd4hhzS0jjjuOvciEJkn1shjb9ab",
+                  },
+                ],
+                subject_code: "Y01SM02",
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+
+{
+  name: "Maths",
+  description:
+    "Maths Notes XD ",
+
+  link: "/Maths",
+  years: [
+    {
+      year: 1,
+      semesters: [
+        {
+          number: 10,
+          subjects: [
+            {
+              name: "1st Year Drive Link",
+              notes: [
+                {
+                  title: "Maths 1st Sem",
+                  type: "theory",
+                  link: "https://drive.google.com/drive/folders/1EHqT2hTuaADcG-q5SKuMCY75scJP4AOH",
+                },
+                {
+                  title: "Maths 2nd Sem",
+                  type: "theory",
+                  link: "https://physicsrvce.wordpress.com",
+                },
+              ],
+              subject_code: "MA1x/2x",
+            },
+            {
+              name: "2nd Year Drive Link",
+              notes: [
+                {
+                  title: "Maths 3rd Sem",
+                  type: "theory",
+                  link: "https://drive.google.com/drive/folders/1o4U3vd4hhzS0jjjuOvciEJkn1shjb9ab",
+                },
+                {
+                  title: "Maths 4th Sem",
+                  type: "theory",
+                  link: "https://physicsrvce.wordpress.com",
+                },
+              ],
+              subject_code: "MA3x/4x",
+            },
+          ],
+        },
+      ],
+    },
+  ],
+},
+
+
+
+
+
+
+
+
+
+
+{
+  name: "ALL Dept Drive Access",
+  description:
+    "All Notes XD ",
+
+  link: "/MegaAccess",
+  years: [
+    {
+      year: 1,
+      semesters: [
+        {
+          number: 12340,
+          subjects: [
+            {
+              name: "CSE ISE AIML",
+              notes: [
+                {
+                  title: "2nd Year",
+                  type: "theory",
+                  link: "https://drive.google.com/drive/folders/1gNXa1BkKYSwut8tnHifh3gFojzYWpl9Z?usp=sharing",
+                },
+                {
+                  title: "3rd Year",
+                  type: "theory",
+                  link: "https://drive.google.com/drive/folders/1D7v0gPbPlS5Yj3T1LLNrWCtLyFR0CLiJ?usp=sharing",
+                },
+                {
+                  title: "4th Year",
+                  type: "theory",
+                  link: "https://drive.google.com/drive/folders/1ow4-_cxSb2pbSakJtdMFr0cR7nISMmDE?usp=sharing",
+                },
+              ],
+              subject_code: "CSE_ALL",
+            },
+            {
+              name: "IEM",
+              notes: [
+                {
+                  title: "2nd Year",
+                  type: "theory",
+                  link: "https://drive.google.com/drive/folders/1MIbjGqKrQvNPF5RGXV9kgP7dHWuVE_gL?usp=sharing",
+                },
+                {
+                  title: "3rd Year",
+                  type: "theory",
+                  link: "https://drive.google.com/drive/folders/1M0cBC0KTpMwFfV4DSJgdA0oIf-GdWvvp?usp=sharing",
+                },
+                {
+                  title: "4th Year",
+                  type: "theory",
+                  link: "https://drive.google.com/drive/folders/1Cri-Fx-NBGKVns2PIoq6GMeiw7Uo5QM6?usp=sharing",
+                },
+              ],
+              subject_code: "IEM_ALL",
+            },
+            {
+              name: "EEE",
+              notes: [
+                {
+                  title: "2nd Year",
+                  type: "theory",
+                  link: "https://drive.google.com/drive/folders/19A8TV5OzjZALhCfmgNmRtf3ZQONe7fRd?usp=sharing",
+                },
+                {
+                  title: "3rd Year",
+                  type: "theory",
+                  link: "https://drive.google.com/drive/folders/1nJv_xZS-DcIF0Cp1EKf_6DlmZsVWHohg?usp=sharing",
+                },
+                {
+                  title: "4th Year",
+                  type: "theory",
+                  link: "https://drive.google.com/drive/folders/1NT3PbjQID1MmzEnq3k7-Z56Q9yd3XoIC?usp=sharing",
+                },
+              ],
+              subject_code: "EEE_ALL",
+            },
+            {
+              name: "ECE",
+              notes: [
+                {
+                  title: "2nd Year",
+                  type: "theory",
+                  link: "https://drive.google.com/drive/folders/1pXdScbWeV9scFHr1hQBMGIZCO3tA2ZEQ?usp=sharing",
+                },
+                {
+                  title: "3rd Year",
+                  type: "theory",
+                  link: "https://drive.google.com/drive/folders/1C9iXjGBqh7R6W2445AsNLF8avhRkuq9k?usp=sharing",
+                },
+                {
+                  title: "4th Year",
+                  type: "theory",
+                  link: "https://drive.google.com/drive/folders/1v-RbuD3xFqAXSegdAbOdHw_QZOaLCaEd?usp=sharing",
+                },
+              ],
+              subject_code: "ECE_ALL",
+            },
+            {
+              name: "ASE",
+              notes: [
+                {
+                  title: "2nd Year",
+                  type: "theory",
+                  link: "https://drive.google.com/drive/folders/11ZDcsdD5TyKSRVFbZa0rRRb7i3L6yZUG?usp=sharing",
+                },
+                {
+                  title: "3rd Year",
+                  type: "theory",
+                  link: "https://drive.google.com/drive/folders/1dw73SO6Rw4xoWb2mODc3XHGW4Sn-t1YF?usp=sharing",
+                },
+                {
+                  title: "4th Year",
+                  type: "theory",
+                  link: "https://drive.google.com/drive/folders/1ABKXYj3bQ5UZzh7BsBX1Q4DbZtnTRKOm?usp=sharing",
+                },
+              ],
+              subject_code: "ASE_ALL",
+            },
+            {
+              name: "ETE",
+              notes: [
+                {
+                  title: "2nd Year",
+                  type: "theory",
+                  link: "https://drive.google.com/drive/folders/1EVzMktSxQkI2zfDFPQ_zTAsARoBVNltj?usp=sharing",
+                },
+                {
+                  title: "3rd Year",
+                  type: "theory",
+                  link: "https://drive.google.com/drive/folders/1OB1xSP8vK133ZcwTGdZcelTXejvAxZcE?usp=sharing",
+                },
+                {
+                  title: "4th Year",
+                  type: "theory",
+                  link: "https://drive.google.com/drive/folders/1oMNz_u2MdLcgB_HnMsy7FieqsvtAQ756?usp=sharing",
+                },
+              ],
+              subject_code: "ETE_ALL",
+            },
+            {
+              name: "ME",
+              
+              notes: [
+                {
+                  title: "2nd Year",
+                  type: "theory",
+                  link: "https://drive.google.com/drive/folders/1DYsmpZvphte68JcfeezIeSWAMxEnU-WB?usp=sharing",
+                },
+                {
+                  title: "3rd Year",
+                  type: "theory",
+                  link: "https://drive.google.com/drive/folders/13AJLTpxteNNPQTDZNup1wyD6wywY0yLg?usp=sharing",
+                },
+                {
+                  title: "4th Year",
+                  type: "theory",
+                  link: "https://drive.google.com/drive/folders/1eDqhV1CIDycoQ7740wWwwWWSGOkMbMZ0?usp=sharing",
+                },
+              ],
+              subject_code: "ME_ALL",
+            },
+            {
+              name: "CH",
+              
+              notes: [
+                {
+                  title: "2nd Year",
+                  type: "theory",
+                  link: "https://drive.google.com/drive/folders/1fGS2ciz-PRoOyhX2OX0EuHpK5gVVRKUT?usp=sharing",
+                },
+                {
+                  title: "3rd Year",
+                  type: "theory",
+                  link: "https://drive.google.com/drive/folders/11uFVZ58JtfVP1qsSVAE26W6iO8Oh5OBb?usp=sharing",
+                },
+                {
+                  title: "4th Year",
+                  type: "theory",
+                  link: "https://drive.google.com/drive/folders/1PAOUSD5foqQEUwi3FKeJwXXGIREXP0T9?usp=sharing",
+                },
+              ],
+              subject_code: "CH_ALL",
+            },
+
+            {
+              name: "CV",
+              
+              notes: [
+                {
+                  title: "2nd Year",
+                  type: "theory",
+                  link: "https://drive.google.com/drive/folders/1aZqB6S-abDky66oRh5DWDa75QpRHsP70?usp=sharing",
+                },
+                {
+                  title: "3rd Year",
+                  type: "theory",
+                  link: "https://drive.google.com/drive/folders/1pxLXq3ZpJ0-pyATadSQDviJucnFpOp6X?usp=sharing",
+                },
+                {
+                  title: "4th Year",
+                  type: "theory",
+                  link: "https://drive.google.com/drive/folders/1yajULJ2ilTwsE1zzYz0Q-HbtvoO6AjZO?usp=sharing",
+                },
+              ],
+              subject_code: "CV_ALL",
+            },
+
+            {
+              name: "BT",
+              
+              notes: [
+                {
+                  title: "2nd Year",
+                  type: "theory",
+                  link: "https://drive.google.com/drive/folders/151ZzTqP66Bghw2Ktcc6vFgUDCLn4fPu7?usp=sharing",
+                },
+                {
+                  title: "3rd Year",
+                  type: "theory",
+                  link: "https://drive.google.com/drive/folders/1DJKcWxjZ18y6WAY3jCf7OfcrL5UuDDF_?usp=sharing",
+                },
+                {
+                  title: "4th Year",
+                  type: "theory",
+                  link: "https://drive.google.com/drive/folders/1m3q6MtKFTZx5LgBQZ1tzPfRzQmS7IeyT?usp=sharing",
+                },
+              ],
+              subject_code: "BT_ALL",
+            },
+
+            {
+              name: "EIE",
+              
+              notes: [
+                {
+                  title: "2nd Year",
+                  type: "theory",
+                  link: "https://drive.google.com/drive/folders/18MmSKM_deFftfaq8TvzQPVWxMJlxJwG_?usp=sharing",
+                },
+                {
+                  title: "3rd Year",
+                  type: "theory",
+                  link: "https://drive.google.com/drive/folders/1Kkwh94l4uZ5QGi4lW70C8zs_4UbraFmt?usp=sharing",
+                },
+                {
+                  title: "4th Year",
+                  type: "theory",
+                  link: "https://drive.google.com/drive/folders/1eFbP0pfb8ToKC7dZDtdVYpoyI3808_JO?usp=sharing",
+                },
+              ],
+              subject_code: "EIE_ALL",
+            },
+
+          ],
+        },
+      ],
+    },
+  ],
+},
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ];
 
 export const contributors: Contributors[] = [
@@ -2315,8 +2729,8 @@ export const contributors: Contributors[] = [
     link: "https://krishnatejaswi-s.vercel.app",
   },
   {
-    name: "Sushas P",
-    contribution: "GDrive",
+    name: "Suhas P",
+    contribution: "Notes & GDrive",
     description: "",
     department: "ETE",
     year: 2026,
@@ -2396,6 +2810,21 @@ export const contributors: Contributors[] = [
     link: "",
   },
   {
+    name: "S Dhanush",
+    contribution: "Notes",
+    description: "",
+    department: "CSE",
+    year: 2025,
+    link: "",
+  },  {
+    name: "S Ashiq",
+    contribution: "Notes",
+    description: "",
+    department: "CSE",
+    year: 2025,
+    link: "",
+  },
+  {
     name: "Aditya Joshi",
     contribution: "Notes",
     description: "",
@@ -2443,14 +2872,7 @@ export const contributors: Contributors[] = [
     year: 2026,
     link: "",
   },
-  {
-    name: "Sushas",
-    contribution: "Notes",
-    description: "",
-    department: "ETE",
-    year: 2026,
-    link: "",
-  },
+  
   {
     name: "Shreesha",
     contribution: "Notes",
@@ -2490,5 +2912,13 @@ export const contributors: Contributors[] = [
     department: "CSE",
     year: 2026,
     link: "",
+  },
+  {
+    name: "Other Contributors ",
+    contribution: "Notes",
+    description: "This card contains a link to an Excel sheet where contributions are recorded. In case the maintainers fail to update the contributions here on this page, please add your name or relevant contribution details directly into the linked sheet.",
+    department: "BE (Any)",
+    year: 2100,
+    link: "https://docs.google.com/spreadsheets/d/1WjA5blnF5cq-2GIFe6Ib_yKbacw26cyW133MTlwYtF4/edit?usp=sharing",
   },
 ];
