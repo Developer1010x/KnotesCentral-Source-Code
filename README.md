@@ -5,9 +5,9 @@ A humble attempt to create a collaborative platform for students to share notes 
 
 ## Website Developers:
 
-- [Developer1010x](https://developer1010x.github.io/PORTFOLIO/) V1 & Idea
+- [Developer1010x](https://developer1010x.github.io/PORTFOLIO/) V1 & Idea S Prajwall N
 
-- [KTS-o7](https://kts-o7.github.io) Refactoring and Updates
+- [KTS-o7](https://kts-o7.github.io) Refactoring and Updates  Krishna Tejaswi 
 
 ## Overview
 
