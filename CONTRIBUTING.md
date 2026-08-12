@@ -1,48 +1,94 @@
 # Contributing to Knotes Central
 
-Thank you for considering contributing to Knotes Central! Your contributions help us create a comprehensive resource for students. Please follow the guidelines below to ensure a smooth contribution process.
+Everything on the site was uploaded by a student a year or two ahead of whoever
+is reading it. Adding to it should take a minute — here are the two ways.
 
-## How to Contribute Notes
+## 1. The short form (no code)
 
-### 1. Submit Your Contribution
+**[→ Add notes](https://github.com/Developer1010x/KnotesCentral-Source-Code/issues/new?template=add-notes.yml)**
 
-- **Use RVCE Mail ID:** Contributions will only be accepted from users with an RVCE mail ID.
-- **Upload ID Card:** Please upload a clear image of your RVCE ID card through the Google form provided on the [Credits page](credits.html).
+1. Upload your files to a Google Drive folder and share it with RVCE (or push
+   them to a public GitHub repo).
+2. Open the form, pick the department / year / semester, paste the link.
+3. Submit. A maintainer adds the entry, and your name goes on the
+   [contributors page](https://knotescentral.github.io/contributors).
 
-### 2. Fill Out the Google Form
+You need a free GitHub account and nothing else. No Git, no cloning.
 
-1. Go to the [Credits page](https://developer1010x.github.io/KnotesCentral/main/credits.html).
-2. Navigate to the "Report Issues and Send Content" section.
-3. Fill out the Google form with the following details:
-   - Your full name
-   - Your RVCE mail ID
-   - Link to your Google Drive folder containing the notes/materials you wish to contribute
-   - Any additional comments or information
+Broken link instead?
+**[Report it](https://github.com/Developer1010x/KnotesCentral-Source-Code/issues/new?template=broken-link.yml)** —
+that counts as contributing too.
 
-### 3. Content Review
+## 2. Edit the department file directly
 
-- **Content Verification:** Once submitted, your content will be reviewed by our team for accuracy and relevance.
-- **Approval:** If approved, your content will be added to the appropriate section of Knotes Central.
+The whole catalog is plain data: one file per department under
+`src/data/departments/`. Open the file for your branch on GitHub, hit the pencil
+icon, and add your entry. GitHub forks the repo and opens a pull request for
+you — nothing can break.
 
-## Important Guidelines
+Find the right `semester`, then add to its `subjects` array:
 
-- **Original Content:** Ensure that the content you submit is your own work or that you have the necessary permissions to share it.
-- **File Format:** Preferred formats are PDF, DOCX, and PPTX for documents and ZIP for multiple files.
-- **Quality:** Make sure the notes are clear, well-organized, and free from any inappropriate content.
+```ts
+{
+  name: "Data Structures and its Applications",
+  subject_code: "CSE201",
+  notes: [
+    {
+      title: "DSA Unit 1-5 notes",
+      type: "theory",          // "theory" | "lab" | "question-paper"
+      link: "https://drive.google.com/drive/folders/...",
+    },
+  ],
+}
+```
 
-## Liability
+Keep the shape exactly as above. The site reads these files directly, so a typo
+fails the build on your pull request rather than breaking a page.
 
-By submitting content, you agree that:
+New department? Add `src/data/departments/<slug>.ts` following any existing
+file, then register it in `src/data/departments/index.ts`.
 
-- The content will be checked and verified by our team.
-- If any issues arise, you will be liable for the content you submitted.
+Adding yourself to the contributors page: append an entry to
+`src/data/contributors.ts`.
 
-## Contributing to the GitHub Repository
+## Guidelines
 
-We welcome contributions to the Knotes Central GitHub repository as well. Here are some general guidelines for contributing code, documentation, or other materials:
+- **Original content.** Submit your own work, or material you have permission to
+  share.
+- **Access.** Links must be openable by RVCE students — share Drive folders with
+  *Anyone at RVCE with the link*.
+- **Formats.** PDF, DOCX, PPTX for documents; ZIP for bundles; a public repo for
+  code.
+- **Quality.** Clear, organised, correctly labelled with the subject and, where
+  it matters, the professor or year.
 
-### 1. Fork the Repository
+By submitting content you confirm it is yours to share, and that you are
+responsible for what you submit.
 
-1. Fork the repository to your own GitHub account.
-2. Clone the forked repository to your local machine:
-   git clone https://github.com/your-username/KnotesCentral.git
+## Working on the site itself
+
+```bash
+npm install
+npm run dev         # http://localhost:3000
+npm run check:data  # validates the catalog — run this before opening a PR
+npm run typecheck
+npm run lint
+npm run build       # prerenders every department, year, semester and subject
+```
+
+`check:data` is the one that matters for content PRs. It catches unbalanced
+braces, invalid `type` values, links missing `https://`, empty titles, and
+departments missing from `index.ts` — and says how to fix each one. CI runs it
+on every pull request, so a bad entry fails the check instead of shipping a
+broken card.
+
+- `src/data/` — the catalog (departments, contributors) and its types.
+- `src/lib/` — lookups, search, note-type metadata, theme, site links.
+- `src/components/ui/` — the shared design-system pieces.
+- `src/app/` — routes; the dynamic ones prerender via `generateStaticParams`.
+- `scripts/` — build-time helpers: catalog validation, PWA icons, and the
+  What's New dates (read from git history, so no manual changelog).
+
+Colours are CSS custom properties in `src/app/globals.css`, exposed to Tailwind
+as semantic names (`bg-surface`, `text-muted`, `border-line`, `text-brand`).
+Prefer those over raw palette classes so both themes stay correct.

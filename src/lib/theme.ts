@@ -1,37 +1,56 @@
-// Check if we're in the browser
-const isBrowser = typeof window !== "undefined";
+export type Theme = "light" | "dark";
 
-// Get theme from localStorage or system preference
-export function getInitialTheme(): string {
-  // Always return dark for server-side rendering
-  if (!isBrowser) return "dark";
+export const THEME_STORAGE_KEY = "theme";
+export const DARK_CLASS = "dark";
+export const DEFAULT_THEME: Theme = "dark";
+
+/** Reads the stored choice, else the OS preference. Browser only. */
+export function readTheme(): Theme {
+  if (typeof window === "undefined") return DEFAULT_THEME;
 
   try {
-    // Check localStorage first
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "light" || savedTheme === "dark") {
-      return savedTheme;
-    }
+    const stored = localStorage.getItem(THEME_STORAGE_KEY);
+    if (stored === "light" || stored === "dark") return stored;
 
-    // Fall back to system preference
-    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      return "dark";
-    }
-
-    return "light";
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
   } catch {
-    return "dark";
+    return DEFAULT_THEME;
   }
 }
 
-// Set theme in localStorage and update document class
-export function setTheme(theme: string) {
-  if (!isBrowser) return;
+/** Applies the theme to <html> and persists it. */
+export function applyTheme(theme: Theme, persist = true) {
+  if (typeof document === "undefined") return;
+
+  document.documentElement.classList.toggle(DARK_CLASS, theme === "dark");
+  if (!persist) return;
 
   try {
-    localStorage.setItem("theme", theme);
-    document.documentElement.classList.toggle("dark", theme === "dark");
+    localStorage.setItem(THEME_STORAGE_KEY, theme);
   } catch {
-    console.log("Failed to set theme");
+    // Storage blocked (private mode, disabled cookies) — theme is still applied
+    // for this page view, it just will not survive a reload.
   }
 }
+
+/**
+ * Runs before hydration so the first paint already has the right theme.
+ * Mirrors readTheme()/applyTheme() above; keep the three constants in sync.
+ */
+export const THEME_INIT_SCRIPT = `
+(function () {
+  try {
+    var stored = localStorage.getItem(${JSON.stringify(THEME_STORAGE_KEY)});
+    var theme = stored === "light" || stored === "dark"
+      ? stored
+      : (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    document.documentElement.classList.toggle(${JSON.stringify(
+      DARK_CLASS
+    )}, theme === "dark");
+  } catch (e) {
+    document.documentElement.classList.add(${JSON.stringify(DARK_CLASS)});
+  }
+})();
+`;

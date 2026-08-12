@@ -1,0 +1,96 @@
+name: Add notes
+description: Share notes, a lab manual or a question paper. No coding needed.
+title: "Add notes: "
+labels: ["content"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for adding to Knotes Central. Fill this in and a maintainer will
+        put it on the site — usually within a few days.
+
+        **Before you start:** upload your files to a Google Drive folder and set
+        sharing to *Anyone at RVCE with the link*, or use a public GitHub repo.
+
+  - type: input
+    id: department
+    attributes:
+      label: Department
+      description: e.g. CSE / ISE / AIML, ECE, Mechanical
+      placeholder: Computer Science, Information Science, AIML Engineering
+    validations:
+      required: true
+
+  - type: input
+    id: year
+    attributes:
+      label: Year
+      placeholder: "2"
+    validations:
+      required: true
+
+  - type: input
+    id: semester
+    attributes:
+      label: Semester
+      placeholder: "3"
+    validations:
+      required: true
+
+  - type: input
+    id: subject
+    attributes:
+      label: Subject name
+      placeholder: Data Structures and its Applications
+    validations:
+      required: true
+
+  - type: input
+    id: subject_code
+    attributes:
+      label: Subject code
+      placeholder: CSE201
+
+  - type: dropdown
+    id: type
+    attributes:
+      label: What kind of material is it?
+      options:
+        - Theory notes
+        - Lab material
+        - Question papers
+    validations:
+      required: true
+
+  - type: input
+    id: title
+    attributes:
+      label: Title to show on the site
+      placeholder: DSA Unit 1–5 notes (Prof. Sharma)
+    validations:
+      required: true
+
+  - type: input
+    id: link
+    attributes:
+      label: Link
+      description: Google Drive folder, Google Doc or GitHub repo.
+      placeholder: https://drive.google.com/drive/folders/...
+    validations:
+      required: true
+
+  - type: input
+    id: credit
+    attributes:
+      label: Name for the contributors page
+      description: Leave blank to stay anonymous.
+
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: Confirm
+      options:
+        - label: This is my own work, or I have permission to share it.
+          required: true
+        - label: The link is accessible to RVCE students.
+          required: true

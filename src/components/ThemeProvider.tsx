@@ -1,41 +1,44 @@
-'use client';
-import { createContext, useContext, useEffect, useState, ReactNode } from "react";
-
-type Theme = "light" | "dark";
+"use client";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+  type ReactNode,
+} from "react";
+import { applyTheme, DEFAULT_THEME, readTheme, type Theme } from "@/lib/theme";
 
 const ThemeContext = createContext<{
   theme: Theme;
   toggleTheme: () => void;
 }>({
-  theme: "dark",
+  theme: DEFAULT_THEME,
   toggleTheme: () => {},
 });
 
 export const useTheme = () => useContext(ThemeContext);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<Theme>("dark");
+  const [theme, setTheme] = useState<Theme>(DEFAULT_THEME);
 
+  // The inline script in the layout already set the class; this only syncs
+  // React state with what the document is actually showing.
   useEffect(() => {
-    // Initialize theme
-    const savedTheme = localStorage.getItem("theme") as Theme;
-    const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-    const initialTheme = savedTheme || systemTheme;
-    
-    setTheme(initialTheme);
-    document.documentElement.classList.toggle("dark", initialTheme === "dark");
+    setTheme(readTheme());
   }, []);
 
-  const toggleTheme = () => {
-    const newTheme = theme === "dark" ? "light" : "dark";
-    setTheme(newTheme);
-    localStorage.setItem("theme", newTheme);
-    document.documentElement.classList.toggle("dark", newTheme === "dark");
-  };
+  const toggleTheme = useCallback(() => {
+    setTheme((current) => {
+      const next: Theme = current === "dark" ? "light" : "dark";
+      applyTheme(next);
+      return next;
+    });
+  }, []);
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
       {children}
     </ThemeContext.Provider>
   );
-} 
+}

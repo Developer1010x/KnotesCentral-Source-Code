@@ -1,0 +1,70 @@
+name: Link check
+
+on:
+  schedule:
+    - cron: "0 3 * * 1" # Mondays, 03:00 UTC
+  workflow_dispatch:
+
+# Drive folders die when the RVCE account that owned them is purged, so the
+# catalog rots silently. This finds the damage weekly and files it as an issue.
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Check every resource link
+        run: node scripts/check-links.mjs > link-report.txt 2>/dev/null || true
+
+      - name: Summarise
+        run: cat link-report.txt >> "$GITHUB_STEP_SUMMARY"
+
+      - name: File or update the tracking issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const report = fs.readFileSync('link-report.txt', 'utf8');
+            const title = 'Broken links — automated weekly check';
+            const body = [
+              'Automated check of every link in `src/data/departments/`.',
+              '',
+              '`needs-auth` is normal for RVCE-restricted Drive folders and is not a problem.',
+              '`probably-gone` means Drive returned 404 — the folder was almost certainly deleted.',
+              '',
+              '```',
+              report.trim().slice(0, 55000),
+              '```',
+            ].join('\n');
+
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: 'broken-link',
+            });
+
+            const existing = issues.find((issue) => issue.title === title);
+
+            if (existing) {
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: existing.number,
+                body,
+              });
+            } else {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title,
+                body,
+                labels: ['broken-link'],
+              });
+            }

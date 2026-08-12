@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# generated at build time (added.json is committed so a fresh clone typechecks)
+/public/icon-*.png
+/public/apple-icon.png

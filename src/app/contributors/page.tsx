@@ -1,17 +1,36 @@
-import { contributors } from "../../data/mockData";
-import ContributorCard from "../../components/contributorCard";
+import type { Metadata } from "next";
+import { contributors } from "@/data/contributors";
+import ContributorCard from "@/components/ContributorCard";
+import { PageHeader } from "@/components/ui/PageHeader";
+import { CardGrid } from "@/components/ui/Card";
+import { AddNotesButton } from "@/components/ContributeCTA";
+
+export const metadata: Metadata = {
+  title: "Contributors",
+  description:
+    "The RVCE students who collected, uploaded and maintain the notes on Knotes Central.",
+};
 
 export default function ContributorsPage() {
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">
-        Contributors
-      </h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {contributors.map((contributor, index) => (
-          <ContributorCard key={index} contributor={contributor} />
+    <div className="space-y-8">
+      <PageHeader
+        eyebrow="Credits"
+        title="Contributors"
+        description={`${contributors.length} students have added notes, maintained the drives or built this site. If you upload something, your name belongs here too.`}
+        trail={[{ label: "Departments", href: "/" }, { label: "Contributors" }]}
+      >
+        <AddNotesButton label="Add your contribution" />
+      </PageHeader>
+
+      <CardGrid>
+        {contributors.map((contributor) => (
+          <ContributorCard
+            key={`${contributor.name}-${contributor.department}-${contributor.year}`}
+            contributor={contributor}
+          />
         ))}
-      </div>
+      </CardGrid>
     </div>
   );
 }
