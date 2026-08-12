@@ -5,7 +5,7 @@ is reading it. Adding to it should take a minute — here are the two ways.
 
 ## 1. The short form (no code)
 
-**[→ Add notes](https://github.com/Developer1010x/KnotesCentral-Source-Code/issues/new?template=add-notes.yml)**
+**[→ Add notes](https://github.com/Developer1010x/knotesneo/issues/new?template=add-notes.yml)**
 
 1. Upload your files to a Google Drive folder and share it with RVCE (or push
    them to a public GitHub repo).
@@ -16,7 +16,7 @@ is reading it. Adding to it should take a minute — here are the two ways.
 You need a free GitHub account and nothing else. No Git, no cloning.
 
 Broken link instead?
-**[Report it](https://github.com/Developer1010x/KnotesCentral-Source-Code/issues/new?template=broken-link.yml)** —
+**[Report it](https://github.com/Developer1010x/knotesneo/issues/new?template=broken-link.yml)** —
 that counts as contributing too.
 
 ## 2. Edit the department file directly

@@ -3,8 +3,8 @@
 Notes, lab manuals and previous-year question papers for RVCE — every
 department, year and semester in one place.
 
-**Contribute:** [add notes in about a minute](https://github.com/Developer1010x/KnotesCentral-Source-Code/issues/new?template=add-notes.yml)
-· [report a broken link](https://github.com/Developer1010x/KnotesCentral-Source-Code/issues/new?template=broken-link.yml)
+**Contribute:** [add notes in about a minute](https://github.com/Developer1010x/knotesneo/issues/new?template=add-notes.yml)
+· [report a broken link](https://github.com/Developer1010x/knotesneo/issues/new?template=broken-link.yml)
 · [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ## What it does

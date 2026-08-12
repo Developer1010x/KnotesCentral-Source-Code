@@ -31,7 +31,7 @@ export const SITE_NOTICE: {
 
 export const GITHUB = {
   owner: "Developer1010x",
-  repo: "KnotesCentral-Source-Code",
+  repo: "knotesneo",
   branch: "main",
 } as const;
 

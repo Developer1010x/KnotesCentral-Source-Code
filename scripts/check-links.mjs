@@ -70,7 +70,7 @@ async function check(entry) {
       headers: {
         // Drive returns very different bodies to non-browser agents.
         "user-agent":
-          "Mozilla/5.0 (compatible; KnotesCentralLinkCheck/1.0; +https://github.com/Developer1010x/KnotesCentral-Source-Code)",
+          "Mozilla/5.0 (compatible; KnotesCentralLinkCheck/1.0; +https://github.com/Developer1010x/knotesneo)",
       },
     });
 
