@@ -1,4 +1,4 @@
-# Contributing to Knotes Central
+# Contributing to KnotesNeo
 
 Everything on the site was uploaded by a student a year or two ahead of whoever
 is reading it. Adding to it should take a minute — here are the two ways.

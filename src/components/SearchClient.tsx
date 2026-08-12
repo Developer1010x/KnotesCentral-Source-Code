@@ -6,10 +6,12 @@ import { useDeferredValue, useEffect, useMemo, useState } from "react";
 import type { NoteType } from "@/data/types";
 import {
   availableNoteTypes,
+  departmentOptions,
   searchSubjects,
   semesterPath,
   subjectPath,
 } from "@/lib/catalog";
+import { countUsable } from "@/lib/linkHealth";
 import { noteTypeMeta } from "@/lib/noteTypes";
 import { CardGrid } from "@/components/ui/Card";
 import { SubjectCard } from "@/components/SubjectCard";
@@ -18,19 +20,33 @@ import { Icon } from "@/components/ui/icons";
 
 const MAX_RESULTS = 60;
 const FILTERS = availableNoteTypes();
+const DEPARTMENTS = departmentOptions();
 
 export function SearchClient() {
   const router = useRouter();
   const params = useSearchParams();
   const [query, setQuery] = useState(params.get("q") ?? "");
   const [types, setTypes] = useState<NoteType[]>([]);
+  const [department, setDepartment] = useState("");
+  const [onlyWorking, setOnlyWorking] = useState(true);
   // Keeps typing responsive: filtering runs against a lagging value.
   const deferredQuery = useDeferredValue(query);
 
-  const results = useMemo(
-    () => searchSubjects(deferredQuery, { types }),
-    [deferredQuery, types]
-  );
+  const results = useMemo(() => {
+    let hits = searchSubjects(deferredQuery, { types });
+
+    if (department) {
+      hits = hits.filter((hit) => hit.department.link === department);
+    }
+
+    // Dead links are still in the catalog; most people searching want the
+    // things they can actually open.
+    if (onlyWorking) {
+      hits = hits.filter((hit) => countUsable(hit.subject.notes).usable > 0);
+    }
+
+    return hits;
+  }, [deferredQuery, types, department, onlyWorking]);
 
   const toggleType = (type: NoteType) =>
     setTypes((current) =>
@@ -114,6 +130,34 @@ export function SearchClient() {
               Clear
             </button>
           )}
+        </div>
+
+        <div className="mt-3 flex flex-wrap items-center gap-3">
+          <label className="flex items-center gap-2 text-xs text-muted">
+            Department
+            <select
+              value={department}
+              onChange={(e) => setDepartment(e.target.value)}
+              className="rounded-lg border border-line bg-surface px-2.5 py-1.5 text-xs text-fg outline-none focus:border-brand"
+            >
+              <option value="">All departments</option>
+              {DEPARTMENTS.map((option) => (
+                <option key={option.link} value={option.link}>
+                  {option.name}
+                </option>
+              ))}
+            </select>
+          </label>
+
+          <label className="flex cursor-pointer items-center gap-2 text-xs text-muted">
+            <input
+              type="checkbox"
+              checked={onlyWorking}
+              onChange={(e) => setOnlyWorking(e.target.checked)}
+              className="h-3.5 w-3.5 accent-[rgb(var(--brand))]"
+            />
+            Hide subjects with no working links
+          </label>
         </div>
       </header>
 

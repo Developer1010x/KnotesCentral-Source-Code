@@ -10,7 +10,7 @@ import { githubEditUrl, REPO_URL, reportIssueUrl } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Contribute notes",
   description:
-    "Two ways to add notes to Knotes Central: a short GitHub form, or editing the department file directly.",
+    "Two ways to add notes to KnotesNeo: a short GitHub form, or editing the department file directly.",
 };
 
 const SNIPPET = `{

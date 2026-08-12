@@ -10,7 +10,7 @@ import { subjectPath } from "@/lib/catalog";
 export const metadata: Metadata = {
   title: "What's new",
   description:
-    "Notes, lab manuals and question papers most recently added to Knotes Central.",
+    "Notes, lab manuals and question papers most recently added to KnotesNeo.",
 };
 
 const MONTH = new Intl.DateTimeFormat("en-GB", {

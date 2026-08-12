@@ -1,6 +1,6 @@
 {
-  "name": "Knotes Central — RVCE notes",
-  "short_name": "Knotes",
+  "name": "KnotesNeo \u2014 RVCE notes",
+  "short_name": "KnotesNeo",
   "description": "Notes, lab manuals and question papers for RVCE, in one place.",
   "start_url": "/",
   "scope": "/",
@@ -8,7 +8,10 @@
   "orientation": "portrait",
   "background_color": "#f8fafc",
   "theme_color": "#4f46e5",
-  "categories": ["education", "books"],
+  "categories": [
+    "education",
+    "books"
+  ],
   "icons": [
     {
       "src": "/icon-192.png",
@@ -30,8 +33,17 @@
     }
   ],
   "shortcuts": [
-    { "name": "Search subjects", "url": "/search" },
-    { "name": "Saved", "url": "/saved" },
-    { "name": "Contribute", "url": "/contribute" }
+    {
+      "name": "Search subjects",
+      "url": "/search"
+    },
+    {
+      "name": "Saved",
+      "url": "/saved"
+    },
+    {
+      "name": "Contribute",
+      "url": "/contribute"
+    }
   ]
 }

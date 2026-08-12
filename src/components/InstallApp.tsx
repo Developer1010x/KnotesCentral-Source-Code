@@ -50,7 +50,7 @@ export function InstallApp() {
         </span>
         <div>
           <p className="text-sm font-semibold text-fg">
-            Install Knotes on your phone
+            Install KnotesNeo on your phone
           </p>
           <p className="text-sm text-muted">
             Opens like an app, and pages you have visited work offline.

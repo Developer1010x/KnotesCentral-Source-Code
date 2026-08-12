@@ -8,7 +8,7 @@ import { AddNotesButton } from "@/components/ContributeCTA";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "What Knotes Central is, how the notes are stored, and how RVCE students can keep it going.",
+    "What KnotesNeo is, how the notes are stored, and how RVCE students can keep it going.",
 };
 
 const STEPS = [
@@ -38,7 +38,7 @@ export default function About() {
 
       <div className="prose-page">
         <p>
-          Knotes Central is a comprehensive collection of academic resources for
+          KnotesNeo is a comprehensive collection of academic resources for
           RVCE — notes, question papers and lab manuals, gathered in one place
           so nobody has to hunt for them again. Our motto:{" "}
           <em>&quot;{SITE.motto}&quot;</em>
@@ -110,7 +110,7 @@ export default function About() {
               rel="noopener noreferrer"
               className="text-brand hover:underline"
             >
-              Knotes Central V1
+              KnotesNeo V1
             </a>
           </li>
           <li>
@@ -120,7 +120,7 @@ export default function About() {
               rel="noopener noreferrer"
               className="text-brand hover:underline"
             >
-              Knotes Central V2
+              KnotesNeo V2
             </a>
           </li>
         </ul>

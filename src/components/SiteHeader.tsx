@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { CommandPalette } from "@/components/CommandPalette";
+import { ShortcutsHelp } from "@/components/ShortcutsHelp";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { Icon } from "@/components/ui/icons";
 import { SITE } from "@/lib/site";
@@ -11,32 +12,80 @@ import { SITE } from "@/lib/site";
 const NAV = [
   { href: "/", label: "Departments" },
   { href: "/whats-new", label: "What's new" },
+  { href: "/gaps", label: "Help needed" },
   { href: "/saved", label: "Saved" },
   { href: "/contribute", label: "Contribute" },
-  { href: "/about", label: "About" },
 ];
+
+/** "g" then a letter, the convention people already know from GitHub. */
+const GO_TO: Record<string, string> = {
+  h: "/",
+  s: "/saved",
+  n: "/whats-new",
+  c: "/contribute",
+  g: "/gaps",
+};
 
 export function SiteHeader() {
   const pathname = usePathname();
+  const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [helpOpen, setHelpOpen] = useState(false);
 
   // Route change closes whatever was open.
   useEffect(() => {
     setMenuOpen(false);
     setSearchOpen(false);
+    setHelpOpen(false);
   }, [pathname]);
 
   useEffect(() => {
+    let awaitingGo = false;
+
+    const typing = (target: EventTarget | null) => {
+      const element = target as HTMLElement | null;
+      return (
+        !!element &&
+        (element.isContentEditable ||
+          ["INPUT", "TEXTAREA", "SELECT"].includes(element.tagName))
+      );
+    };
+
     const onKey = (event: globalThis.KeyboardEvent) => {
       if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
         event.preventDefault();
         setSearchOpen(true);
+        return;
+      }
+
+      // Never hijack a key while someone is filling in a form.
+      if (event.metaKey || event.ctrlKey || event.altKey || typing(event.target)) {
+        return;
+      }
+
+      const key = event.key.toLowerCase();
+
+      if (awaitingGo && GO_TO[key]) {
+        event.preventDefault();
+        awaitingGo = false;
+        router.push(GO_TO[key]);
+        return;
+      }
+      awaitingGo = key === "g";
+
+      if (key === "/") {
+        event.preventDefault();
+        setSearchOpen(true);
+      } else if (event.key === "?") {
+        event.preventDefault();
+        setHelpOpen(true);
       }
     };
+
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, []);
+  }, [router]);
 
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
@@ -136,6 +185,7 @@ export function SiteHeader() {
       </header>
 
       <CommandPalette open={searchOpen} onClose={() => setSearchOpen(false)} />
+      <ShortcutsHelp open={helpOpen} onClose={() => setHelpOpen(false)} />
     </>
   );
 }

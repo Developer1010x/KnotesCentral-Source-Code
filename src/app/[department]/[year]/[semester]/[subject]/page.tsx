@@ -17,10 +17,12 @@ import {
   findSemester,
   findSubject,
   findYear,
+  sameSubjectElsewhere,
+  subjectPath,
   subjectSlug,
 } from "@/lib/catalog";
 import { isNew } from "@/lib/changelog";
-import { isGone } from "@/lib/linkHealth";
+import { countUsable, isGone, isUsable } from "@/lib/linkHealth";
 import { reportIssueUrl } from "@/lib/site";
 import { JsonLd, breadcrumbLd, courseLd } from "@/components/StructuredData";
 
@@ -92,6 +94,17 @@ export default async function SubjectPage({ params }: { params: Params }) {
   const path = `${semesterPath}/${subjectSlug(subject, semester)}`;
   const counts = countNotes(subject.notes);
   const siblings = semester.subjects.filter((other) => other !== subject);
+  const { usable, broken } = countUsable(subject.notes);
+
+  // When a subject's own links have died, the same course in another branch is
+  // usually the fastest rescue.
+  const elsewhere =
+    usable === 0
+      ? sameSubjectElsewhere(
+          { department, year, semester, subject },
+          isUsable
+        ).slice(0, 4)
+      : [];
 
   const trail = [
     { label: "Departments", href: "/" },
@@ -139,7 +152,7 @@ export default async function SubjectPage({ params }: { params: Params }) {
         <div className="mt-4 flex flex-wrap gap-2">
           <DoneToggle path={path} />
           <ShareButton
-            title={`${subject.name} — Knotes Central`}
+            title={`${subject.name} — KnotesNeo`}
             text={`${subject.name} notes (${department.name}, Sem ${semester.number})`}
           />
           <AddNotesButton
@@ -192,6 +205,51 @@ export default async function SubjectPage({ params }: { params: Params }) {
           and it gets fixed.
         </p>
       </section>
+
+      {elsewhere.length > 0 && (
+        <section
+          aria-labelledby="elsewhere-heading"
+          className="card border-brand/30 p-5"
+        >
+          <h2
+            id="elsewhere-heading"
+            className="flex items-center gap-2 text-sm font-semibold text-fg"
+          >
+            <Icon name="sparkles" className="h-4 w-4 text-brand" />
+            {broken > 0
+              ? "These links are dead — but another branch still has this subject"
+              : "This subject is also taught elsewhere"}
+          </h2>
+          <p className="mt-1 text-sm text-muted">
+            Same course, different department. The material is usually close
+            enough to revise from.
+          </p>
+          <ul className="mt-3 space-y-2">
+            {elsewhere.map((match) => (
+              <li key={subjectPath(match)}>
+                <Link
+                  href={subjectPath(match)}
+                  className="group flex items-center justify-between gap-3 rounded-lg border border-line p-3 hover:border-brand/40"
+                >
+                  <span className="min-w-0">
+                    <span className="block truncate text-sm font-medium text-fg group-hover:text-brand">
+                      {match.department.name}
+                    </span>
+                    <span className="block truncate text-xs text-muted">
+                      {match.subject.name} · Year {match.year.year} · Sem{" "}
+                      {match.semester.number}
+                    </span>
+                  </span>
+                  <Icon
+                    name="arrowRight"
+                    className="h-4 w-4 shrink-0 text-brand"
+                  />
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       {siblings.length > 0 && (
         <section aria-labelledby="siblings-heading">

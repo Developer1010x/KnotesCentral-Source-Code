@@ -8,7 +8,7 @@ import { AddNotesButton } from "@/components/ContributeCTA";
 export const metadata: Metadata = {
   title: "Contributors",
   description:
-    "The RVCE students who collected, uploaded and maintain the notes on Knotes Central.",
+    "The RVCE students who collected, uploaded and maintain the notes on KnotesNeo.",
 };
 
 export default function ContributorsPage() {

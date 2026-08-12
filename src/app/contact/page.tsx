@@ -12,7 +12,7 @@ import {
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Questions, corrections or notes to contribute — how to reach the Knotes Central maintainers.",
+    "Questions, corrections or notes to contribute — how to reach the KnotesNeo maintainers.",
 };
 
 const CHANNELS: Array<{

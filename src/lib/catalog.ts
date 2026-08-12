@@ -136,6 +136,50 @@ export function findSubject(
   );
 }
 
+/* -------------------------------------------------------------- gap finding */
+
+/**
+ * Subjects whose material is entirely unusable — every link dead or missing.
+ * With Drive folders disappearing when accounts are purged, this is the list
+ * that actually needs volunteers.
+ */
+export function subjectsNeedingHelp(
+  usable: (note: Note) => boolean
+): SubjectLocation[] {
+  return allSubjects().filter(
+    ({ subject }) =>
+      subject.notes.length === 0 || !subject.notes.some((note) => usable(note))
+  );
+}
+
+/** Loose match so "DBMS" and "dbms notes" land together across branches. */
+function subjectFingerprint(subject: Subject): string {
+  return slugify(subject.name);
+}
+
+/**
+ * The same subject taught in another department. When one branch's notes die,
+ * another branch's copy of the same course is the fastest rescue.
+ */
+export function sameSubjectElsewhere(
+  target: SubjectLocation,
+  usable: (note: Note) => boolean
+): SubjectLocation[] {
+  const fingerprint = subjectFingerprint(target.subject);
+  const code = target.subject.subject_code.toLowerCase();
+
+  return allSubjects().filter((candidate) => {
+    if (candidate.department.link === target.department.link) return false;
+
+    const matches =
+      subjectFingerprint(candidate.subject) === fingerprint ||
+      (Boolean(code) &&
+        candidate.subject.subject_code.toLowerCase() === code);
+
+    return matches && candidate.subject.notes.some((note) => usable(note));
+  });
+}
+
 /* ------------------------------------------------------------------ search */
 
 export interface SubjectLocation {

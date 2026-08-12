@@ -1,6 +1,6 @@
 /** Single place for the outward-facing links and copy the site repeats. */
 export const SITE = {
-  name: "Knotes Central",
+  name: "KnotesNeo",
   tagline: "Notes, lab manuals and question papers for RVCE — in one place.",
   motto: "For all, For Always!",
   description:
@@ -23,8 +23,8 @@ export const SITE_NOTICE: {
   title: "Many Drive folders have been deleted",
   body:
     "RVCE accounts are purged after students graduate, and their Drive files go with them. A lot of links here are dead as a result — they are marked below, and we are working on re-uploading the material somewhere it cannot expire. If you still have any of these files, please send them.",
-  href: "/contribute",
-  linkLabel: "Help re-upload notes",
+  href: "/gaps",
+  linkLabel: "See what is missing and help",
 };
 
 /* ------------------------------------------------------- contributing flow */

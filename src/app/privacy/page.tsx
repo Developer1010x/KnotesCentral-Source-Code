@@ -5,7 +5,7 @@ import { PageHeader } from "@/components/ui/PageHeader";
 export const metadata: Metadata = {
   title: "Privacy policy",
   description:
-    "What Knotes Central does and does not collect, and how third-party links are handled.",
+    "What KnotesNeo does and does not collect, and how third-party links are handled.",
 };
 
 export default function Privacy() {
@@ -20,7 +20,7 @@ export default function Privacy() {
       <div className="prose-page">
         <h2>Information collection and use</h2>
         <p>
-          Knotes Central is committed to protecting your privacy. We do not
+          KnotesNeo is committed to protecting your privacy. We do not
           collect any personal information unless you explicitly provide it
           through our contact forms. Anything collected is used solely to
           improve the service and respond to your enquiry.

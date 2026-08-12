@@ -6,6 +6,7 @@ import { AddNotesButton } from "@/components/ContributeCTA";
 const BROWSE = [
   { href: "/", label: "All departments" },
   { href: "/whats-new", label: "What's new" },
+  { href: "/gaps", label: "Help needed" },
   { href: "/saved", label: "Saved on this device" },
   { href: "/contribute", label: "Contribute notes" },
   { href: "/search", label: "Search subjects" },

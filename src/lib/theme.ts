@@ -1,34 +1,47 @@
 export type Theme = "light" | "dark";
+/** What the reader chose. "system" keeps following the OS setting. */
+export type ThemeChoice = Theme | "system";
 
 export const THEME_STORAGE_KEY = "theme";
 export const DARK_CLASS = "dark";
 export const DEFAULT_THEME: Theme = "dark";
 
-/** Reads the stored choice, else the OS preference. Browser only. */
-export function readTheme(): Theme {
+export function systemTheme(): Theme {
   if (typeof window === "undefined") return DEFAULT_THEME;
+  return window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dark"
+    : "light";
+}
+
+/** The stored choice, or "system" when nothing was ever chosen. */
+export function readChoice(): ThemeChoice {
+  if (typeof window === "undefined") return "system";
 
   try {
     const stored = localStorage.getItem(THEME_STORAGE_KEY);
-    if (stored === "light" || stored === "dark") return stored;
-
-    return window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? "dark"
-      : "light";
+    return stored === "light" || stored === "dark" ? stored : "system";
   } catch {
-    return DEFAULT_THEME;
+    return "system";
   }
 }
 
-/** Applies the theme to <html> and persists it. */
-export function applyTheme(theme: Theme, persist = true) {
+/** Reads the stored choice, else the OS preference. Browser only. */
+export function readTheme(): Theme {
+  const choice = readChoice();
+  return choice === "system" ? systemTheme() : choice;
+}
+
+/** Applies a choice to <html> and persists it. "system" clears the override. */
+export function applyTheme(choice: ThemeChoice, persist = true) {
   if (typeof document === "undefined") return;
 
-  document.documentElement.classList.toggle(DARK_CLASS, theme === "dark");
+  const resolved = choice === "system" ? systemTheme() : choice;
+  document.documentElement.classList.toggle(DARK_CLASS, resolved === "dark");
   if (!persist) return;
 
   try {
-    localStorage.setItem(THEME_STORAGE_KEY, theme);
+    if (choice === "system") localStorage.removeItem(THEME_STORAGE_KEY);
+    else localStorage.setItem(THEME_STORAGE_KEY, choice);
   } catch {
     // Storage blocked (private mode, disabled cookies) — theme is still applied
     // for this page view, it just will not survive a reload.

@@ -1,4 +1,4 @@
-# Knotes Central
+# KnotesNeo
 
 Notes, lab manuals and previous-year question papers for RVCE — every
 department, year and semester in one place.

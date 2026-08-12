@@ -5,7 +5,7 @@ import { SearchClient } from "@/components/SearchClient";
 export const metadata: Metadata = {
   title: "Search",
   description:
-    "Search every RVCE subject on Knotes Central by name, subject code or note title.",
+    "Search every RVCE subject on KnotesNeo by name, subject code or note title.",
 };
 
 export default function SearchPage() {

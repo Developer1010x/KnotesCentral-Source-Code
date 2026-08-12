@@ -11,7 +11,7 @@ import {
 } from "@/lib/catalog";
 import { SITE } from "@/lib/site";
 
-export const alt = "Subject on Knotes Central";
+export const alt = "Subject on KnotesNeo";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 

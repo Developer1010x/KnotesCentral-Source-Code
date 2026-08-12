@@ -61,6 +61,7 @@ export const PAGE_INDEX: PageEntry[] = [
   { name: "All departments", path: "/", hint: "Browse the catalog" },
   { name: "Search subjects", path: "/search", hint: "Full search page" },
   { name: "What's new", path: "/whats-new", hint: "Recently added material" },
+  { name: "Help needed", path: "/gaps", hint: "Subjects with nothing left" },
   { name: "Saved", path: "/saved", hint: "Your bookmarks and progress" },
   { name: "Contribute notes", path: "/contribute", hint: "Add material" },
   { name: "Contributors", path: "/contributors", hint: "Who built this" },
