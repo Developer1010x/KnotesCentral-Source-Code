@@ -1,70 +1,119 @@
-import { departments } from "../data/mockData";
+import Link from "next/link";
+import { departments } from "@/data/departments";
+import { CardGrid } from "@/components/ui/Card";
+import { CoverageBadges } from "@/components/ui/Badge";
+import { TileLink } from "@/components/ui/TileLink";
+import { Icon } from "@/components/ui/icons";
+import { RecentlyViewed } from "@/components/RecentlyViewed";
+import { MySemester } from "@/components/MySemester";
+import {
+  catalogStats,
+  countNotes,
+  departmentNotes,
+  departmentOptions,
+  subjectCount,
+} from "@/lib/catalog";
+import { lastUpdated } from "@/lib/changelog";
+import { contributors } from "@/data/contributors";
+import { SITE } from "@/lib/site";
+import { AddNotesButton, ContributeBanner } from "@/components/ContributeCTA";
+
+const stats = catalogStats();
+const updated = lastUpdated();
+const UPDATED_FORMAT = new Intl.DateTimeFormat("en-GB", {
+  month: "long",
+  year: "numeric",
+  timeZone: "UTC",
+});
+
+function Stat({ value, label }: { value: number; label: string }) {
+  return (
+    <div className="rounded-card border border-line bg-surface px-4 py-3">
+      <p className="text-2xl font-bold tabular-nums text-fg">{value}</p>
+      <p className="text-xs uppercase tracking-wide text-muted">{label}</p>
+    </div>
+  );
+}
 
 export default function Home() {
   return (
-    <div className="space-y-8">
-      {/* Hero Section */}
-      <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-neon-blue to-neon-purple bg-clip-text text-transparent">
-          Welcome to Knotes Central
-        </h1>
-        <p className="text-lg text-foreground/70">
-          Choose your department to access study materials
+    <div className="space-y-12">
+      <section className="animate-fade-up">
+        <p className="text-xs font-semibold uppercase tracking-widest text-brand">
+          For every RVCE batch
         </p>
-      </div>
+        <h1 className="mt-2 max-w-3xl text-display font-bold text-fg">
+          Every note, lab manual and question paper — in one place.
+        </h1>
+        <p className="mt-4 max-w-prose text-base leading-7 text-muted">
+          {SITE.description}
+        </p>
 
-      {/* Departments Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-        {departments.map((department) => (
-          <a
-            key={department.name}
-            href={department.link}
-            className="group block"
+        <div className="mt-6 flex flex-wrap items-center gap-3">
+          <Link
+            href="/search"
+            className="inline-flex items-center gap-2 rounded-lg bg-brand px-4 py-2.5 text-sm font-semibold text-brand-contrast hover:opacity-90"
           >
-            <div className="bg-white/50 dark:bg-gray-800/50 rounded-xl p-6 h-full border border-neon-purple/20 backdrop-blur-sm transition-all duration-300 hover:shadow-lg hover:shadow-neon-purple/10 hover:border-neon-purple/40">
-              <div className="flex items-center space-x-4 mb-4">
-                <div className="bg-gradient-to-r from-neon-blue to-neon-purple p-3 rounded-lg">
-                  <svg
-                    className="w-6 h-6 text-white"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-                    />
-                  </svg>
-                </div>
-                <h2 className="text-2xl font-bold text-foreground group-hover:text-neon-purple transition-colors">
-                  {department.name}
-                </h2>
-              </div>
-              <p className="text-foreground/70 line-clamp-2">
-                {department.description}
-              </p>
-              <div className="mt-4 flex items-center text-sm text-neon-purple">
-                <span>Browse resources</span>
-                <svg
-                  className="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
-              </div>
-            </div>
-          </a>
-        ))}
-      </div>
+            <Icon name="search" className="h-4 w-4" />
+            Find a subject
+          </Link>
+          <AddNotesButton label="Contribute notes" variant="outline" />
+        </div>
+
+        <div className="mt-8 grid max-w-2xl grid-cols-2 gap-3 sm:grid-cols-4">
+          <Stat value={stats.departments} label="Departments" />
+          <Stat value={stats.subjects} label="Subjects" />
+          <Stat value={stats.notes} label="Resources" />
+          <Stat value={contributors.length} label="Contributors" />
+        </div>
+      </section>
+
+      <MySemester options={departmentOptions()} />
+
+      <RecentlyViewed />
+
+      <section aria-labelledby="departments-heading">
+        <div className="mb-5 flex items-end justify-between gap-4 border-b border-line pb-3">
+          <div>
+            <h2
+              id="departments-heading"
+              className="text-lg font-semibold text-fg"
+            >
+              Browse by department
+            </h2>
+            <p className="mt-1 text-sm text-muted">
+              Pick yours, then the year and semester you are in.
+            </p>
+          </div>
+          {updated && (
+            <Link
+              href="/whats-new"
+              className="shrink-0 text-sm font-medium text-brand hover:underline"
+            >
+              Updated {UPDATED_FORMAT.format(new Date(updated))} →
+            </Link>
+          )}
+        </div>
+
+        <CardGrid>
+          {departments.map((department) => (
+            <TileLink
+              key={department.link}
+              href={department.link}
+              icon="book"
+              title={department.name}
+              meta={`${subjectCount(department)} subjects · ${
+                department.years.length
+              } years`}
+            >
+              <CoverageBadges counts={countNotes(departmentNotes(department))} />
+            </TileLink>
+          ))}
+        </CardGrid>
+      </section>
+
+      <ContributeBanner />
+
     </div>
   );
 }

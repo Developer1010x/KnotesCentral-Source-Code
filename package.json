@@ -1,16 +1,25 @@
 {
-  "name": "knotes-central-v3",
+  "name": "knotesneo",
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "predev": "node scripts/build-changelog.mjs",
     "dev": "next dev",
+    "prebuild": "node scripts/build-changelog.mjs && node scripts/build-icons.mjs && node scripts/validate-data.mjs",
     "build": "next build",
-    "start": "next start",
+    "postbuild": "node scripts/fix-export-images.mjs",
+    "serve": "serve out -l 3000",
+    "start": "npm run serve",
     "lint": "next lint",
-    "export": "next export"
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "icons": "node scripts/build-icons.mjs",
+    "check:data": "node scripts/validate-data.mjs",
+    "check:links": "node scripts/check-links.mjs",
+    "check:links:write": "node scripts/check-links.mjs --write"
   },
   "dependencies": {
-    "next": "latest",
+    "next": "^15.1.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
@@ -21,10 +30,11 @@
     "@types/react-dom": "^19",
     "autoprefixer": "^10.4.20",
     "eslint": "^9",
-    "eslint-config-next": "latest",
+    "eslint-config-next": "^15.1.6",
     "postcss": "^8.5.1",
+    "serve": "^14.2.6",
     "tailwindcss": "^3.4.17",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^4.1.10"
   }
 }
-

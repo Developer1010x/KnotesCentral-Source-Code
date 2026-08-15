@@ -1,72 +1,105 @@
+import type { Metadata } from "next";
+import { PageHeader } from "@/components/ui/PageHeader";
+import { Icon, type IconName } from "@/components/ui/icons";
+import {
+  CONTACT_EMAIL,
+  CONTACT_FORM_URL,
+  REDDIT,
+  addNotesIssueUrl,
+  reportIssueUrl,
+} from "@/lib/site";
+
+export const metadata: Metadata = {
+  title: "Contact",
+  description:
+    "Questions, corrections or notes to contribute — how to reach the KnotesNeo maintainers.",
+};
+
+const CHANNELS: Array<{
+  icon: IconName;
+  title: string;
+  body: string;
+  href: string;
+  cta: string;
+}> = [
+  {
+    icon: "sparkles",
+    title: "Add notes",
+    body: "Paste a Drive or GitHub link into a short form. A maintainer puts it on the site.",
+    href: addNotesIssueUrl(),
+    cta: "Open the form",
+  },
+  {
+    icon: "inbox",
+    title: "Report a broken link",
+    body: "A note that will not open, or points at the wrong material.",
+    href: reportIssueUrl(),
+    cta: "Report it",
+  },
+  {
+    icon: "check",
+    title: "Anything else",
+    body: "Requests, corrections and general feedback through our form.",
+    href: CONTACT_FORM_URL,
+    cta: "Open the form",
+  },
+  {
+    icon: "mail",
+    title: "Email",
+    body: CONTACT_EMAIL,
+    href: `mailto:${CONTACT_EMAIL}`,
+    cta: "Send an email",
+  },
+  {
+    icon: "users",
+    title: "Reddit",
+    body: "Ask the wider RVCE community on r/rvce, or follow r/KnotesCentral for updates.",
+    href: REDDIT.knotes,
+    cta: "Open r/KnotesCentral",
+  },
+];
+
 export default function Contact() {
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-6">Contact Us</h1>
-      <div className="max-w-2xl mx-auto">
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-8 text-center">
-          <p className="text-gray-700 dark:text-gray-300 mb-6">
-            Have questions, suggestions, or want to contribute? We&apos;d love
-            to hear from you. Click the button below to fill out our contact
-            form.
-          </p>
+    <div className="space-y-8">
+      <PageHeader
+        eyebrow="Get in touch"
+        title="Contact"
+        description="Broken link, missing subject, or notes you want to add? Any of these reach us."
+        trail={[{ label: "Departments", href: "/" }, { label: "Contact" }]}
+      />
 
+      <div className="grid gap-4 sm:grid-cols-2">
+        {CHANNELS.map((channel) => (
           <a
-            href="https://docs.google.com/forms/d/e/1FAIpQLSek3-e8OHFkYXfa6RajVYPwCa4JHeJnM1V4JAJim7d-3_XTIw/viewform"
-            target="_blank"
+            key={channel.title}
+            href={channel.href}
+            target={channel.href.startsWith("mailto:") ? undefined : "_blank"}
             rel="noopener noreferrer"
-            className="inline-block bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium py-3 px-6 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-colors duration-300"
+            className="card-interactive group flex flex-col p-5"
           >
-            Open Contact Form
+            <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-soft text-brand">
+              <Icon name={channel.icon} className="h-5 w-5" />
+            </span>
+            <h2 className="mt-4 text-base font-semibold text-fg group-hover:text-brand">
+              {channel.title}
+            </h2>
+            <p className="mt-1 text-sm leading-6 text-muted">{channel.body}</p>
+            <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-brand">
+              {channel.cta}
+              <Icon
+                name="arrowRight"
+                className="h-4 w-4 transition-transform motion-safe:group-hover:translate-x-1"
+              />
+            </span>
           </a>
-        </div>
-
-        
-        <div className="text-center text-gray-600 dark:text-gray-400">
-  <p className="mb-2">You can also reach us at:</p>
-  <a
-    href="mailto:knotescentral@gmail.com"
-    className="text-blue-600 dark:text-blue-400 hover:underline"
-  >
-    knotescentral@gmail.com
-  </a>
-  <p className="mt-2">Follow us on Reddit:</p>
-  <a
-    href="https://www.reddit.com/r/rvce/?rdt=55828"
-    className="text-blue-600 dark:text-blue-400 hover:underline block"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    RVCE Reddit
-  </a>
-  <a
-    href="https://www.reddit.com/r/KnotesCentral/s/dAFwnFf3gi"
-    className="text-blue-600 dark:text-blue-400 hover:underline block"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    Knotes Reddit
-  </a>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        ))}
       </div>
+
+      <p className="text-sm text-muted">
+        Most notes live on RVCE Workspace Drive, so you may need to be signed in
+        with your college account to open them.
+      </p>
     </div>
   );
 }

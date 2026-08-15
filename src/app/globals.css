@@ -2,201 +2,160 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+ * Colour tokens are RGB triplets so Tailwind's `/opacity` modifiers work
+ * (see tailwind.config.ts). Light is the default; `.dark` on <html> flips them.
+ * Every foreground/background pair below clears WCAG AA at body size.
+ */
 :root {
-  /* Base colors */
-  --background: #ffffff;
-  --foreground: #171717;
+  --page: 248 250 252; /* slate-50  */
+  --surface: 255 255 255;
+  --raised: 241 245 249; /* slate-100 */
+  --line: 226 232 240; /* slate-200 */
+  --fg: 15 23 42; /* slate-900 */
+  --muted: 71 85 105; /* slate-600 — 7.2:1 on --surface */
 
-  /* Neon Colors */
-  --neon-blue: #00ffff; /* Cyan */
-  --neon-purple: #ff00ff; /* Magenta */
-  --neon-pink: #ff69b4; /* Hot Pink */
-  --neon-green: #39ff14; /* Neon Green */
+  --brand: 79 70 229; /* indigo-600 */
+  --brand-soft: 238 242 255; /* indigo-50  */
+  --brand-contrast: 255 255 255;
 
-  /* Glow effects */
-  --neon-blue-glow: 0 0 10px rgba(0, 255, 255, 0.5);
-  --neon-purple-glow: 0 0 10px rgba(255, 0, 255, 0.5);
-  --neon-text-glow: 0 0 5px rgba(255, 255, 255, 0.5);
+  --accent: 13 148 136; /* teal-600 */
 
-  /* Card and UI */
-  --card-bg: rgba(255, 255, 255, 0.05);
-  --card-border: rgba(255, 255, 255, 0.1);
-  --card-hover: rgba(255, 255, 255, 0.1);
+  --theory: 37 99 235; /* blue-600   */
+  --lab: 5 150 105; /* emerald-600 */
+  --paper: 217 119 6; /* amber-600   */
 
-  color-scheme: light dark;
+  color-scheme: light;
 }
 
-/* Dark mode overrides */
 .dark {
-  --background: #191919;
-  --foreground: #bbbbbb;
-  --card-bg: rgba(0, 0, 0, 0.02);
-  --card-border: rgba(0, 0, 0, 0.1);
-  --card-hover: rgba(0, 0, 0, 0.05);
-}
+  --page: 2 6 23; /* slate-950 */
+  --surface: 15 23 42; /* slate-900 */
+  --raised: 30 41 59; /* slate-800 */
+  --line: 51 65 85; /* slate-700 */
+  --fg: 241 245 249; /* slate-100 */
+  --muted: 148 163 184; /* slate-400 — 7.4:1 on --surface */
 
-/* Base styles */
-body {
-  color: var(--foreground);
-  background: var(--background);
-  min-height: 100vh;
-  background-image: radial-gradient(
-      circle at 15% 50%,
-      rgba(0, 255, 255, 0.08) 0%,
-      transparent 25%
-    ),
-    radial-gradient(
-      circle at 85% 50%,
-      rgba(255, 0, 255, 0.08) 0%,
-      transparent 25%
-    );
-  background-attachment: fixed;
-}
+  --brand: 129 140 248; /* indigo-400 */
+  --brand-soft: 30 27 75; /* indigo-950 */
+  --brand-contrast: 15 23 42;
 
-/* Smooth transitions */
-* {
-  transition: all 0.2s ease-in-out;
-}
+  --accent: 45 212 191; /* teal-400 */
 
-/* Mobile-first card styles */
-.card {
-  @apply rounded-xl p-4 md:p-6 backdrop-blur-sm;
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-}
+  --theory: 96 165 250; /* blue-400    */
+  --lab: 52 211 153; /* emerald-400 */
+  --paper: 251 191 36; /* amber-400   */
 
-.card:hover {
-  background: var(--card-hover);
-  box-shadow: var(--neon-purple-glow);
-}
-
-/* Neon text effects */
-.neon-text {
-  text-shadow: var(--neon-text-glow);
-}
-
-.neon-text-blue {
-  color: var(--neon-blue);
-  text-shadow: var(--neon-blue-glow);
-}
-
-.neon-text-purple {
-  color: var(--neon-purple);
-  text-shadow: var(--neon-purple-glow);
-}
-
-/* Mobile-friendly container */
-.container {
-  @apply px-4 mx-auto w-full;
-  max-width: min(100%, 1280px);
-}
-
-/* Mobile navigation adjustments */
-@media (max-width: 768px) {
-  .nav-items {
-    @apply flex-wrap justify-center gap-2;
-  }
-
-  .nav-link {
-    @apply text-sm py-1 px-2;
-  }
-}
-
-/* Gradient borders */
-.gradient-border {
-  position: relative;
-  border-radius: 0.75rem;
-  background: var(--card-bg);
-}
-
-.gradient-border::before {
-  content: "";
-  position: absolute;
-  top: -1px;
-  left: -1px;
-  right: -1px;
-  bottom: -1px;
-  border-radius: 0.75rem;
-  padding: 1px;
-  background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-}
-
-/* Animation keyframes */
-@keyframes glow {
-  0%,
-  100% {
-    text-shadow: var(--neon-text-glow);
-  }
-  50% {
-    text-shadow: var(--neon-purple-glow);
-  }
-}
-
-.animate-glow {
-  animation: glow 2s ease-in-out infinite;
-}
-
-/* Responsive typography */
-h1 {
-  @apply text-2xl md:text-3xl lg:text-4xl font-bold;
-}
-
-h2 {
-  @apply text-xl md:text-2xl lg:text-3xl font-bold;
-}
-
-h3 {
-  @apply text-lg md:text-xl font-semibold;
-}
-
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--background);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--card-border);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--card-hover);
-}
-
-/* Update the nav-link styles */
-.nav-link {
-  @apply px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center;
-}
-
-/* Add mobile menu transition */
-@media (max-width: 768px) {
-  nav {
-    transition: all 0.3s ease-in-out;
-  }
-
-  .nav-link {
-    @apply w-full justify-between;
-  }
-}
-
-/* Smooth theme transitions */
-html {
-  transition: background-color 0.3s ease;
-}
-
-html.dark {
   color-scheme: dark;
 }
 
-/* Prevent transition flash */
-.no-transitions * {
-  transition: none !important;
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-page text-fg antialiased;
+  }
+
+  /* One visible focus treatment for every interactive element. */
+  :where(a, button, input, select, textarea, [tabindex]):focus-visible {
+    @apply outline-none ring-2 ring-brand ring-offset-2 ring-offset-page rounded-md;
+  }
+
+  ::selection {
+    @apply bg-brand/20;
+  }
+}
+
+@layer components {
+  /* Page gutter. Wide enough to breathe, capped so lines stay readable. */
+  .container {
+    @apply w-full mx-auto px-4 sm:px-6 lg:px-8;
+    max-width: 80rem;
+  }
+
+  .card {
+    @apply bg-surface border border-line rounded-card shadow-card;
+  }
+
+  .card-interactive {
+    @apply card transition duration-200 hover:border-brand/40 hover:shadow-lift focus-within:border-brand/40 motion-safe:hover:-translate-y-0.5;
+  }
+
+  .prose-page {
+    @apply max-w-prose text-[0.975rem] leading-7 text-muted;
+  }
+
+  .prose-page h2 {
+    @apply text-xl font-semibold text-fg mt-10 mb-3;
+  }
+
+  .prose-page h3 {
+    @apply text-base font-semibold text-fg mt-6 mb-2;
+  }
+
+  .prose-page p + p {
+    @apply mt-4;
+  }
+
+  .prose-page a {
+    @apply text-brand font-medium underline underline-offset-4 decoration-brand/30 hover:decoration-brand;
+  }
+
+  .prose-page ul {
+    @apply mt-4 space-y-2 list-disc pl-5 marker:text-brand/60;
+  }
+
+  .skeleton {
+    @apply relative overflow-hidden bg-raised rounded-md;
+  }
+
+  /* animate-shimmer, not a raw `animation: shimmer`: Tailwind only emits the
+     @keyframes when the utility that owns them is actually used. */
+  .skeleton::after {
+    content: "";
+    @apply absolute inset-0 -translate-x-full animate-shimmer;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgb(var(--fg) / 0.06),
+      transparent
+    );
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Scrollbar tuned to the surface tokens rather than fixed greys. */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(var(--page));
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--line));
+  border-radius: 6px;
+  border: 2px solid rgb(var(--page));
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--muted) / 0.5);
 }

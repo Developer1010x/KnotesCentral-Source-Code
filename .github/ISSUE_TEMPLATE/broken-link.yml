@@ -1,0 +1,38 @@
+name: Broken or wrong link
+description: A note does not open, or points at the wrong material.
+title: "Broken link: "
+labels: ["broken-link"]
+body:
+  - type: input
+    id: page
+    attributes:
+      label: Page
+      description: The page on the site where you found it.
+      placeholder: /cse-ise-aiml/2/3
+    validations:
+      required: true
+
+  - type: input
+    id: note
+    attributes:
+      label: Which note?
+      placeholder: DMS Study Materials
+    validations:
+      required: true
+
+  - type: dropdown
+    id: problem
+    attributes:
+      label: What happens?
+      options:
+        - Link is dead / 404
+        - Asks for access I cannot get
+        - Opens the wrong material
+        - Something else
+    validations:
+      required: true
+
+  - type: input
+    id: replacement
+    attributes:
+      label: Working link, if you have one
