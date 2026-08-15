@@ -4,10 +4,16 @@ import { departmentSlug, subjectSlug } from "@/lib/catalog";
 import { lastUpdated } from "@/lib/changelog";
 import { SITE } from "@/lib/site";
 
+/* A static export has no server to run this on request. */
+export const dynamic = "force-static";
+
 /** Every page, so search engines index subjects individually. */
 export default function sitemap(): MetadataRoute.Sitemap {
   const modified = lastUpdated() ? new Date(lastUpdated()!) : new Date();
-  const url = (path: string) => `${SITE.url}${path}`;
+  // The export writes every route as <route>/index.html, so the canonical form
+  // of every URL here ends in a slash.
+  const url = (path: string) =>
+    `${SITE.url}${path}${path.endsWith("/") ? "" : "/"}`;
 
   const staticPages: MetadataRoute.Sitemap = (
     [
@@ -15,6 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       { url: url("/search"), priority: 0.8, changeFrequency: "weekly" },
       { url: url("/whats-new"), priority: 0.7, changeFrequency: "weekly" },
       { url: url("/gaps"), priority: 0.6, changeFrequency: "weekly" },
+      { url: url("/rot"), priority: 0.6, changeFrequency: "weekly" },
       { url: url("/contribute"), priority: 0.7, changeFrequency: "monthly" },
       { url: url("/contributors"), priority: 0.5, changeFrequency: "monthly" },
       { url: url("/about"), priority: 0.4, changeFrequency: "yearly" },

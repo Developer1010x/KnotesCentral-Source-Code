@@ -11,7 +11,7 @@ jobs:
   check:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write # commits the updated link status and history
       issues: write
     steps:
       - uses: actions/checkout@v4
@@ -19,11 +19,26 @@ jobs:
         with:
           node-version: 20
 
+      # --write updates src/data/generated/link-status.json (what the site
+      # flags today) and appends this run to link-history.json (what /rot
+      # charts). Without the commit below, the history would never grow.
       - name: Check every resource link
-        run: node scripts/check-links.mjs > link-report.txt 2>/dev/null || true
+        run: node scripts/check-links.mjs --write > link-report.txt 2>/dev/null || true
 
       - name: Summarise
         run: cat link-report.txt >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Commit the new snapshot
+        run: |
+          if git diff --quiet -- src/data/generated; then
+            echo "Nothing changed since the last check."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/generated
+          git commit -m "Link check $(date -u +%Y-%m-%d): record this week's verdicts"
+          git push
 
       - name: File or update the tracking issue
         uses: actions/github-script@v7

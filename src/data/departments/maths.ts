@@ -5,13 +5,13 @@ export const maths: Department = {
   description:
     "Maths Notes XD ",
 
-  link: "/Maths",
+  link: "/maths",
   years: [
     {
       year: 1,
       semesters: [
         {
-          number: 10,
+          number: 0,
           subjects: [
             {
               name: "1st Year Drive Link",

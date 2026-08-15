@@ -5,13 +5,27 @@
  * fails the check instead of shipping a broken card.
  *
  *   npm run check:data
+ *   node scripts/validate-data.mjs --dir=path/to/departments   # used by tests
  */
 import { readdirSync, readFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-const DIR = resolve(root, "src/data/departments");
+
+// The directory is an argument so the checks can be tested against fixtures of
+// deliberately broken data; without it, nothing here is verifiable except by
+// breaking the real catalog.
+const dirArgument = process.argv
+  .slice(2)
+  .find((argument) => argument.startsWith("--dir="));
+
+const DIR = dirArgument
+  ? resolve(root, dirArgument.slice("--dir=".length))
+  : resolve(root, "src/data/departments");
+
+/** Paths in messages stay relative to the repository root. */
+const relative = (file) => `${DIR.replace(`${root}/`, "")}/${file}`;
 
 const VALID_TYPES = new Set(["theory", "lab", "question-paper"]);
 
@@ -29,6 +43,14 @@ function fields(text, key) {
   );
 }
 
+/** Same, for unquoted numeric fields like `year: 2` and `number: 3`. */
+function numberFields(text, key) {
+  return Array.from(
+    text.matchAll(new RegExp(`\\b${key}:\\s*(-?\\d+)`, "g")),
+    (match) => Number(match[1])
+  );
+}
+
 const files = readdirSync(DIR).filter(
   (file) => file.endsWith(".ts") && file !== "index.ts"
 );
@@ -38,7 +60,7 @@ const seenLinks = new Map();
 const seenSlugs = new Set();
 
 for (const file of files) {
-  const path = `src/data/departments/${file}`;
+  const path = relative(file);
   const text = readFileSync(resolve(DIR, file), "utf8");
 
   // Registered in the barrel file?
@@ -70,6 +92,27 @@ for (const file of files) {
       fail(path, `duplicate department link "${deptLink}"`);
     }
     seenSlugs.add(slug.toLowerCase());
+  }
+
+  // Out-of-range years and semesters used to ship as real, sitemap-indexed
+  // URLs (/MegaAccess/1/12340). 0 is the deliberate "not tied to a semester"
+  // value used by /pyqp, /miscellaneous and /all-engineering.
+  for (const year of numberFields(text, "year")) {
+    if (!Number.isInteger(year) || year < 0 || year > 4) {
+      fail(
+        path,
+        `year ${year} is out of range — use 1-4, or 0 for material that is not tied to a year`
+      );
+    }
+  }
+
+  for (const semester of numberFields(text, "number")) {
+    if (!Number.isInteger(semester) || semester < 0 || semester > 8) {
+      fail(
+        path,
+        `semester ${semester} is out of range — use 1-8, or 0 for material that is not tied to a semester`
+      );
+    }
   }
 
   for (const type of types) {

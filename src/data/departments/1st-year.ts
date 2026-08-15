@@ -5,13 +5,13 @@ export const y1stYear: Department = {
     description:
       "Ground Zero of RVCE Lol ",
 
-    link: "/1st_Year",
+    link: "/1st-year",
     years: [
       {
         year: 1,
         semesters: [
           {
-            number: 10,
+            number: 0,
             subjects: [
               {
                 name: "1st Sem Drive Link",

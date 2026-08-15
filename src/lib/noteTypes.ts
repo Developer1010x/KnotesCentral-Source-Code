@@ -43,14 +43,20 @@ export function noteTypeMeta(type: NoteType): NoteTypeMeta {
   );
 }
 
-export type NoteHost = "drive" | "github" | "docs" | "link";
+export type NoteHost = "drive" | "github" | "docs" | "campus" | "link";
+
+/** RFC 1918 / loopback hosts — reachable only from inside the college LAN. */
+const PRIVATE_HOST =
+  /^https?:\/\/(10\.|127\.|192\.168\.|172\.(1[6-9]|2\d|3[01])\.)/i;
 
 /**
  * Where a note actually lives. Juniors need to know before they click whether
- * it is a Drive folder (RVCE login) or a public GitHub repo.
+ * it is a Drive folder (RVCE login), a public GitHub repo, or the library
+ * server that only answers on campus wifi.
  */
 export function noteHost(note: Note): NoteHost {
   const url = note.link.toLowerCase();
+  if (PRIVATE_HOST.test(url)) return "campus";
   if (url.includes("drive.google.com")) return "drive";
   if (url.includes("docs.google.com")) return "docs";
   if (url.includes("github.")) return "github";
@@ -61,5 +67,6 @@ export const HOST_LABEL: Record<NoteHost, string> = {
   drive: "Google Drive · RVCE login",
   docs: "Google Docs",
   github: "GitHub",
+  campus: "RVCE campus wifi only",
   link: "External link",
 };

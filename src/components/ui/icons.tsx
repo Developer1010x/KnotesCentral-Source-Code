@@ -38,6 +38,8 @@ const PATHS = {
   filter: "M3 4h18l-7 8v6l-4 2v-8L3 4z",
   target:
     "M12 3v2m0 14v2m9-9h-2M5 12H3m16 0a7 7 0 11-14 0 7 7 0 0114 0zm-4 0a3 3 0 11-6 0 3 3 0 016 0z",
+  wifi: "M5 12.55a11 11 0 0114 0M8.5 16.1a6 6 0 017 0M2 8.82a15 15 0 0120 0M12 20h.01",
+  chart: "M4 20V10m6 10V4m6 16v-7m-14 7h18",
 } as const;
 
 /** Solid variants, for toggled-on states. */

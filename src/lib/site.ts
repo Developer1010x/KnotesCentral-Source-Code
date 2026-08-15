@@ -1,3 +1,21 @@
+/**
+ * Where the site is served from, and the sub-path it is served under.
+ *
+ * `.github/workflows/deploy.yml` fills both in from the GitHub Pages API, so
+ * they stay right if the repository is renamed or moved to a custom domain.
+ * The defaults are the Pages URL this repository publishes to, which is also
+ * what a local build stamps into the sitemap, the RSS feed and canonical tags.
+ */
+export const BASE_PATH = (process.env.NEXT_PUBLIC_BASE_PATH ?? "").replace(
+  /\/$/,
+  ""
+);
+
+const SITE_URL = (
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  "https://developer1010x.github.io/KnotesCentral-Source-Code"
+).replace(/\/$/, "");
+
 /** Single place for the outward-facing links and copy the site repeats. */
 export const SITE = {
   name: "KnotesNeo",
@@ -5,8 +23,21 @@ export const SITE = {
   motto: "For all, For Always!",
   description:
     "Every RVCE department, year and semester: theory notes, lab material and previous-year question papers, collected and kept up to date by students.",
-  url: "https://knotescentral.github.io",
+  url: SITE_URL,
 } as const;
+
+/** Path to something the site serves itself, carrying the deploy's base path. */
+export const asset = (path: string) => `${BASE_PATH}${path}`;
+
+/**
+ * `metadataBase` for the App Router, and it must be the bare origin.
+ *
+ * Next already prefixes file-based metadata routes (every `opengraph-image`)
+ * with `basePath`, then joins them onto `metadataBase.pathname` — so a
+ * metadataBase that also carried the base path would emit
+ * `…/repo/repo/opengraph-image.png` on every page.
+ */
+export const SITE_ORIGIN = new URL(SITE_URL).origin;
 
 /**
  * Site-wide banner. Set to null when there is nothing to announce; change the

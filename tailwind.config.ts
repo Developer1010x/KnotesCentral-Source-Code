@@ -50,6 +50,9 @@ const config: Config = {
       },
       animation: {
         "fade-up": "fade-up 0.3s ease-out both",
+        // globals.css drives .skeleton::after by raw name; without this entry
+        // Tailwind never emits @keyframes shimmer and every skeleton is dead.
+        shimmer: "shimmer 1.6s infinite",
       },
     },
   },

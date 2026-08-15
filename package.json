@@ -7,8 +7,11 @@
     "dev": "next dev",
     "prebuild": "node scripts/build-changelog.mjs && node scripts/build-icons.mjs && node scripts/validate-data.mjs",
     "build": "next build",
-    "start": "next start",
+    "postbuild": "node scripts/fix-export-images.mjs",
+    "serve": "serve out -l 3000",
+    "start": "npm run serve",
     "lint": "next lint",
+    "test": "vitest run",
     "typecheck": "tsc --noEmit",
     "icons": "node scripts/build-icons.mjs",
     "check:data": "node scripts/validate-data.mjs",
@@ -29,7 +32,9 @@
     "eslint": "^9",
     "eslint-config-next": "^15.1.6",
     "postcss": "^8.5.1",
+    "serve": "^14.2.6",
     "tailwindcss": "^3.4.17",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^4.1.10"
   }
 }

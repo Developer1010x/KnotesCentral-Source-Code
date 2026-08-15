@@ -7,10 +7,18 @@ import { HOST_LABEL, noteHost } from "@/lib/noteTypes";
 import { useBookmarks } from "@/lib/prefs";
 import { addNotesIssueUrl } from "@/lib/site";
 
+/** "Dead since March 2026" reads better than a full date on a badge. */
+const DEAD_SINCE = new Intl.DateTimeFormat("en-GB", {
+  month: "long",
+  year: "numeric",
+  timeZone: "UTC",
+});
+
 const HOST_ICON: Record<ReturnType<typeof noteHost>, IconName> = {
   drive: "drive",
   docs: "drive",
   github: "github",
+  campus: "wifi",
   link: "external",
 };
 
@@ -24,6 +32,7 @@ export function NoteLink({
   path,
   isNew = false,
   isGone = false,
+  deadSince,
 }: {
   note: Note;
   subject: string;
@@ -31,6 +40,8 @@ export function NoteLink({
   isNew?: boolean;
   /** Link was dead at the last automated check — decided on the server. */
   isGone?: boolean;
+  /** ISO date of the first check that saw it dead, when one is recorded. */
+  deadSince?: string;
 }) {
   const host = noteHost(note);
   const { has, toggle, hydrated } = useBookmarks();
@@ -80,7 +91,7 @@ export function NoteLink({
           <span className="mt-1 flex flex-wrap items-center gap-2">
             <NoteTypeBadge type={note.type} />
             <Badge className="bg-paper/10 text-paper ring-1 ring-inset ring-paper/25">
-              Link deleted
+              {deadSince ? `Dead since ${DEAD_SINCE.format(new Date(deadSince))}` : "Link deleted"}
             </Badge>
           </span>
           <span className="mt-1.5 flex flex-wrap items-center gap-3 text-xs">

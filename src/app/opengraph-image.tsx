@@ -2,6 +2,9 @@ import { ImageResponse } from "next/og";
 import { catalogStats } from "@/lib/catalog";
 import { SITE } from "@/lib/site";
 
+/* Generated once at build time — the export has no server. */
+export const dynamic = "force-static";
+
 export const alt = `${SITE.name} — RVCE notes, labs and question papers`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";

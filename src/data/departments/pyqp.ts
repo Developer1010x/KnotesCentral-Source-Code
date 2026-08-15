@@ -18,7 +18,7 @@ export const pyqp: Department = {
                 notes: [
                   {
                     title: "Previous Year Question Papers",
-                    type: "theory",
+                    type: "question-paper",
                     link: "http://172.16.44.10:8080/jspui/handle/123456789/207",
                   },
                 ],
@@ -29,7 +29,7 @@ export const pyqp: Department = {
                 notes: [
                   {
                     title: "Previous Year Question Papers",
-                    type: "theory",
+                    type: "question-paper",
                     link: "https://drive.google.com/drive/folders/1o4U3vd4hhzS0jjjuOvciEJkn1shjb9ab",
                   },
                 ],

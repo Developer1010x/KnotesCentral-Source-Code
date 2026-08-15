@@ -5,6 +5,7 @@ import { NoteLink } from "@/components/NoteLink";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { isNew, recentNotes } from "@/lib/changelog";
 import { isGone } from "@/lib/linkHealth";
+import { deadSince } from "@/lib/linkRot";
 import { subjectPath } from "@/lib/catalog";
 
 export const metadata: Metadata = {
@@ -70,6 +71,7 @@ export default function WhatsNewPage() {
                       path={path}
                       isNew={isNew(item.note)}
                       isGone={isGone(item.note)}
+                      deadSince={deadSince(item.note)}
                     />
                     <Link
                       href={path}

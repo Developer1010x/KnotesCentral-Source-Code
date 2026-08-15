@@ -112,16 +112,17 @@
     @apply relative overflow-hidden bg-raised rounded-md;
   }
 
+  /* animate-shimmer, not a raw `animation: shimmer`: Tailwind only emits the
+     @keyframes when the utility that owns them is actually used. */
   .skeleton::after {
     content: "";
-    @apply absolute inset-0 -translate-x-full;
+    @apply absolute inset-0 -translate-x-full animate-shimmer;
     background: linear-gradient(
       90deg,
       transparent,
       rgb(var(--fg) / 0.06),
       transparent
     );
-    animation: shimmer 1.6s infinite;
   }
 }
 

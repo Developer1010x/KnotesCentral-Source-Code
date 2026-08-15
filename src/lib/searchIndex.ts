@@ -1,6 +1,6 @@
 import { departments } from "@/data/departments";
 import type { NoteType } from "@/data/types";
-import { countNotes } from "@/lib/catalog";
+import { countNotes, subjectSlug } from "@/lib/catalog";
 
 export interface IndexEntry {
   /** Subject name. */
@@ -31,7 +31,12 @@ export const SEARCH_INDEX: IndexEntry[] = departments.flatMap((department) =>
           department: department.name,
           year: year.year,
           semester: semester.number,
-          path: `${department.link}/${year.year}/${semester.number}`,
+          // The subject page, not the semester listing — the palette and the
+          // /search page must agree about where a subject lives.
+          path: `${department.link}/${year.year}/${semester.number}/${subjectSlug(
+            subject,
+            semester
+          )}`,
           notes: counts.total,
           types: (["theory", "lab", "question-paper"] as NoteType[]).filter(
             (type) => counts[type] > 0
@@ -62,6 +67,7 @@ export const PAGE_INDEX: PageEntry[] = [
   { name: "Search subjects", path: "/search", hint: "Full search page" },
   { name: "What's new", path: "/whats-new", hint: "Recently added material" },
   { name: "Help needed", path: "/gaps", hint: "Subjects with nothing left" },
+  { name: "Link rot report", path: "/rot", hint: "What the catalog is losing" },
   { name: "Saved", path: "/saved", hint: "Your bookmarks and progress" },
   { name: "Contribute notes", path: "/contribute", hint: "Add material" },
   { name: "Contributors", path: "/contributors", hint: "Who built this" },

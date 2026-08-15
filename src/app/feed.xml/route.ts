@@ -14,7 +14,8 @@ const escape = (value: string) =>
 export function GET() {
   const items = recentNotes(50)
     .map((item) => {
-      const link = `${SITE.url}${item.path}`;
+      // Trailing slash: the export writes every route as <route>/index.html.
+      const link = `${SITE.url}${item.path}/`;
       const where = `${item.location.department.name} · Year ${item.location.year.year} · Semester ${item.location.semester.number}`;
 
       return `    <item>

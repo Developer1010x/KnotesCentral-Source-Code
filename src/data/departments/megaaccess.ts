@@ -5,13 +5,13 @@ export const megaAccess: Department = {
   description:
     "All Notes XD ",
 
-  link: "/MegaAccess",
+  link: "/megaaccess",
   years: [
     {
-      year: 1,
+      year: 0,
       semesters: [
         {
-          number: 12340,
+          number: 0,
           subjects: [
             {
               name: "CSE ISE AIML",

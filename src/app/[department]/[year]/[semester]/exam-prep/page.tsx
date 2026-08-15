@@ -22,6 +22,7 @@ import {
 } from "@/lib/catalog";
 import { isNew } from "@/lib/changelog";
 import { isGone } from "@/lib/linkHealth";
+import { deadSince } from "@/lib/linkRot";
 import { NOTE_TYPE_ORDER, noteTypeMeta } from "@/lib/noteTypes";
 
 type Params = Promise<{ department: string; year: string; semester: string }>;
@@ -170,6 +171,7 @@ export default async function ExamPrepPage({ params }: { params: Params }) {
                       path={path}
                       isNew={isNew(note)}
                 isGone={isGone(note)}
+                      deadSince={deadSince(note)}
                     />
                     <Link
                       href={path}

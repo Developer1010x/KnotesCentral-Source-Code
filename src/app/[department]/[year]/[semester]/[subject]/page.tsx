@@ -23,6 +23,7 @@ import {
 } from "@/lib/catalog";
 import { isNew } from "@/lib/changelog";
 import { countUsable, isGone, isUsable } from "@/lib/linkHealth";
+import { deadSince } from "@/lib/linkRot";
 import { reportIssueUrl } from "@/lib/site";
 import { JsonLd, breadcrumbLd, courseLd } from "@/components/StructuredData";
 
@@ -183,6 +184,7 @@ export default async function SubjectPage({ params }: { params: Params }) {
                 path={path}
                 isNew={isNew(note)}
                 isGone={isGone(note)}
+                deadSince={deadSince(note)}
               />
             ))}
           </div>

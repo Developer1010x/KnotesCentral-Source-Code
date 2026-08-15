@@ -7,13 +7,13 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { InstallApp } from "@/components/InstallApp";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { THEME_INIT_SCRIPT } from "@/lib/theme";
-import { SITE } from "@/lib/site";
+import { SITE, SITE_ORIGIN, asset } from "@/lib/site";
 import { JsonLd, siteLd } from "@/components/StructuredData";
 
 const inter = Inter({ subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(SITE.url),
+  metadataBase: new URL(SITE_ORIGIN),
   title: {
     default: `${SITE.name} — RVCE notes, labs and question papers`,
     template: `%s · ${SITE.name}`,
@@ -35,10 +35,10 @@ export const metadata: Metadata = {
     description: SITE.description,
   },
   twitter: { card: "summary_large_image" },
-  manifest: "/manifest.webmanifest",
+  manifest: asset("/manifest.webmanifest"),
   appleWebApp: { capable: true, title: SITE.name, statusBarStyle: "default" },
-  icons: { apple: "/apple-icon.png" },
-  alternates: { types: { "application/rss+xml": "/feed.xml" } },
+  icons: { apple: asset("/apple-icon.png") },
+  alternates: { types: { "application/rss+xml": asset("/feed.xml") } },
 };
 
 export const viewport: Viewport = {

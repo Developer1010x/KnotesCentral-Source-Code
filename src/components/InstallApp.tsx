@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Icon } from "@/components/ui/icons";
+import { asset } from "@/lib/site";
 
 interface InstallPromptEvent extends Event {
   prompt: () => Promise<void>;
@@ -19,9 +20,13 @@ export function InstallApp() {
 
   useEffect(() => {
     if ("serviceWorker" in navigator && process.env.NODE_ENV === "production") {
-      navigator.serviceWorker.register("/sw.js").catch(() => {
-        // Offline support is a bonus; a failure here changes nothing else.
-      });
+      // Both paths carry the deploy's base path: a worker registered at the
+      // domain root could not see the pages it is meant to cache.
+      navigator.serviceWorker
+        .register(asset("/sw.js"), { scope: asset("/") })
+        .catch(() => {
+          // Offline support is a bonus; a failure here changes nothing else.
+        });
     }
   }, []);
 

@@ -52,6 +52,13 @@ export default function GapsPage() {
       >
         <div className="flex flex-wrap items-center gap-3">
           <AddNotesButton label="Upload what you have" />
+          <Link
+            href="/rot"
+            className="inline-flex items-center gap-1.5 rounded-lg border border-line bg-surface px-4 py-2.5 text-sm font-semibold text-fg hover:border-brand/40 hover:text-brand"
+          >
+            <Icon name="chart" className="h-4 w-4" />
+            How the rot is tracked
+          </Link>
           <span className="text-sm text-muted">
             {gaps.length} of {stats.subjects} subjects affected
             {LINK_CHECKED_AT &&

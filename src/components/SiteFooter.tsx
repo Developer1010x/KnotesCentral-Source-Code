@@ -7,6 +7,7 @@ const BROWSE = [
   { href: "/", label: "All departments" },
   { href: "/whats-new", label: "What's new" },
   { href: "/gaps", label: "Help needed" },
+  { href: "/rot", label: "Link rot report" },
   { href: "/saved", label: "Saved on this device" },
   { href: "/contribute", label: "Contribute notes" },
   { href: "/search", label: "Search subjects" },

@@ -3,6 +3,8 @@
 Everything on the site was uploaded by a student a year or two ahead of whoever
 is reading it. Adding to it should take a minute — here are the two ways.
 
+![The contribute page: a form that writes the catalog entry for you](docs/screenshots/contribute.png)
+
 ## 1. The short form (no code)
 
 **[→ Add notes](https://github.com/Developer1010x/knotesneo/issues/new?template=add-notes.yml)**
@@ -11,7 +13,7 @@ is reading it. Adding to it should take a minute — here are the two ways.
    them to a public GitHub repo).
 2. Open the form, pick the department / year / semester, paste the link.
 3. Submit. A maintainer adds the entry, and your name goes on the
-   [contributors page](https://knotescentral.github.io/contributors).
+   [contributors page](https://developer1010x.github.io/KnotesCentral-Source-Code/contributors/).
 
 You need a free GitHub account and nothing else. No Git, no cloning.
 
@@ -71,9 +73,11 @@ responsible for what you submit.
 npm install
 npm run dev         # http://localhost:3000
 npm run check:data  # validates the catalog — run this before opening a PR
+npm test            # unit tests over search, slugs, link health and the validator
 npm run typecheck
 npm run lint
 npm run build       # prerenders every department, year, semester and subject
+npm run serve       # serves the build at http://localhost:3000
 ```
 
 `check:data` is the one that matters for content PRs. It catches unbalanced
@@ -86,8 +90,10 @@ broken card.
 - `src/lib/` — lookups, search, note-type metadata, theme, site links.
 - `src/components/ui/` — the shared design-system pieces.
 - `src/app/` — routes; the dynamic ones prerender via `generateStaticParams`.
-- `scripts/` — build-time helpers: catalog validation, PWA icons, and the
-  What's New dates (read from git history, so no manual changelog).
+- `scripts/` — build-time helpers: catalog validation, PWA icons, the What's
+  New dates (read from git history, so no manual changelog), and the weekly
+  link checker that feeds `/gaps` and `/rot`.
+- `tests/` — Vitest. `npm test` runs them; CI runs them on every pull request.
 
 Colours are CSS custom properties in `src/app/globals.css`, exposed to Tailwind
 as semantic names (`bg-surface`, `text-muted`, `border-line`, `text-brand`).
