@@ -108,6 +108,61 @@
     @apply mt-4 space-y-2 list-disc pl-5 marker:text-brand/60;
   }
 
+
+  /* --- The mark ---------------------------------------------------------
+     Two animations, both CSS so <Logo> can stay a server component: the
+     pages ink themselves in on mount, and hovering opens the book. Every
+     animation is `both`, so the reduced-motion rule below — which cuts every
+     duration to 0.01ms — lands on the finished frame, not a blank tile. */
+
+  .logo path {
+    stroke-dasharray: 46;
+    stroke-dashoffset: 0;
+  }
+
+  .logo .logo-page path,
+  .logo .logo-spine,
+  .logo .logo-ribbon {
+    animation: logo-draw 0.7s ease-out both;
+  }
+
+  /* Spine first, then the pages off it, then the ribbon drops in. */
+  .logo .logo-spine {
+    --logo-dash: 16;
+    stroke-dasharray: 16;
+    animation-duration: 0.35s;
+  }
+
+  .logo .logo-page path {
+    animation-delay: 0.25s;
+  }
+
+  /* The ribbon drops in whole instead of drawing: it is 22 units of stroke
+     with a notch in it, and inking that reads as a glitch at header size. */
+  .logo .logo-ribbon {
+    stroke-dasharray: none;
+    animation: logo-ribbon 0.5s 0.7s ease-out both;
+  }
+
+  /* The hinge is the top of the spine, so the pages swing rather than slide.
+     `view-box`, not `fill-box`: the origin has to be 16,10 in the viewBox's
+     own units, and fill-box would measure it from each page's bounding box. */
+  .logo .logo-page {
+    transform-box: view-box;
+    transform-origin: 16px 10px;
+    transition: transform 0.35s cubic-bezier(0.34, 1.4, 0.64, 1);
+  }
+
+  .logo:hover .logo-page-left,
+  a:hover .logo .logo-page-left {
+    transform: rotate(-7deg);
+  }
+
+  .logo:hover .logo-page-right,
+  a:hover .logo .logo-page-right {
+    transform: rotate(7deg);
+  }
+
   .skeleton {
     @apply relative overflow-hidden bg-raised rounded-md;
   }
@@ -123,6 +178,28 @@
       rgb(var(--fg) / 0.06),
       transparent
     );
+  }
+}
+
+@keyframes logo-draw {
+  from {
+    stroke-dashoffset: var(--logo-dash, 46);
+    opacity: 0;
+  }
+  to {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes logo-ribbon {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
   }
 }
 

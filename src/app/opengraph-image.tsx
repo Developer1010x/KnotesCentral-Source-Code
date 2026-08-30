@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
 import { catalogStats } from "@/lib/catalog";
+import { markDataUri } from "@/lib/logo";
 import { SITE } from "@/lib/site";
 
 /* Generated once at build time — the export has no server. */
@@ -28,21 +29,13 @@ export default function OpengraphImage() {
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
-          <div
-            style={{
-              width: 64,
-              height: 64,
-              borderRadius: 16,
-              background: "#4f46e5",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontSize: 36,
-              fontWeight: 700,
-            }}
-          >
-            K
-          </div>
+          {/* Satori has no `<svg>`, so the mark comes in as a data URI. */}
+          <img
+            width={64}
+            height={64}
+            src={markDataUri({ size: 64, radius: 16, padding: 4 })}
+            alt=""
+          />
           <div style={{ fontSize: 32, fontWeight: 700 }}>{SITE.name}</div>
         </div>
 

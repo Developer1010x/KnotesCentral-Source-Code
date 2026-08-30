@@ -4,36 +4,31 @@
  * at stable file names (Next's generated icon routes are content-hashed).
  */
 import { ImageResponse } from "next/og.js";
+import { markDataUri } from "./logo-mark.mjs";
 import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
-const BRAND = "#4f46e5";
-
+/**
+ * Satori has no `<svg>` element, so the mark goes in as an `<img>` carrying a
+ * data URI — `markSvg` renders the same paths the site does.
+ *
+ * A maskable icon is squared off and padded: the launcher applies its own
+ * mask, and anything inside the safe area is what survives it.
+ */
 function icon(size, maskable) {
-  const pad = maskable ? size * 0.14 : 0;
-  const radius = maskable ? size / 2 : size * 0.22;
-
   return {
-    type: "div",
+    type: "img",
     props: {
-      style: {
-        width: size,
-        height: size,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        background: BRAND,
-        borderRadius: maskable ? 0 : radius,
-        color: "#fff",
-        fontSize: size * (maskable ? 0.42 : 0.5),
-        fontWeight: 700,
-        letterSpacing: "-0.05em",
-        padding: pad,
-      },
-      children: "K",
+      width: size,
+      height: size,
+      src: markDataUri({
+        size,
+        radius: maskable ? 0 : 32 * 0.22,
+        padding: maskable ? 32 * 0.14 : 32 * 0.16,
+      }),
     },
   };
 }

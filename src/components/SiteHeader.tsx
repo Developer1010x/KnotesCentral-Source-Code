@@ -7,6 +7,7 @@ import { CommandPalette } from "@/components/CommandPalette";
 import { ShortcutsHelp } from "@/components/ShortcutsHelp";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { Icon } from "@/components/ui/icons";
+import { Logo } from "@/components/ui/Logo";
 import { SITE } from "@/lib/site";
 
 const NAV = [
@@ -102,9 +103,7 @@ export function SiteHeader() {
       <header className="sticky top-0 z-40 border-b border-line bg-page/85 backdrop-blur">
         <div className="container flex h-16 items-center gap-3">
           <Link href="/" className="flex items-center gap-2.5 rounded-lg">
-            <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand text-brand-contrast">
-              <Icon name="book" className="h-5 w-5" />
-            </span>
+            <Logo className="h-9 w-9 shrink-0 text-brand" title={SITE.name} />
             <span className="leading-tight">
               <span className="block text-sm font-bold tracking-tight text-fg">
                 {SITE.name}
