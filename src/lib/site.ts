@@ -6,13 +6,26 @@
  * The defaults are the Pages URL this repository publishes to, which is also
  * what a local build stamps into the sitemap, the RSS feed and canonical tags.
  */
-export const BASE_PATH = (process.env.NEXT_PUBLIC_BASE_PATH ?? "").replace(
-  /\/$/,
-  ""
-);
+
+/**
+ * An empty value counts as unset, not as an empty URL.
+ *
+ * A branch build skips the Pages lookup, so `steps.pages.outputs.*` expand to
+ * empty strings — and `?? default` would let one straight through, leaving
+ * `new URL("")` to throw partway into the build.
+ *
+ * It takes the value, not the variable's name: Next only inlines a
+ * `NEXT_PUBLIC_` variable where it is read as a literal `process.env.NAME`,
+ * so a lookup by dynamic key would come back undefined in the browser bundle.
+ */
+const set = (value: string | undefined) => (value === "" ? undefined : value);
+
+export const BASE_PATH = (
+  set(process.env.NEXT_PUBLIC_BASE_PATH) ?? ""
+).replace(/\/$/, "");
 
 const SITE_URL = (
-  process.env.NEXT_PUBLIC_SITE_URL ??
+  set(process.env.NEXT_PUBLIC_SITE_URL) ??
   "https://developer1010x.github.io/KnotesCentral-Source-Code"
 ).replace(/\/$/, "");
 

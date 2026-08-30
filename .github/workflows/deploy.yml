@@ -33,8 +33,14 @@ jobs:
           node-version: 20
           cache: npm
 
+      # Only the default branch publishes, and only it may touch the Pages
+      # API: the call needs `pages: write` against repository settings, and it
+      # fails outright where Pages has never been enabled. A branch build is
+      # here to prove the export still compiles, so it skips the lookup and
+      # falls back to the defaults in src/lib/site.ts.
       - name: Configure Pages
         id: pages
+        if: github.ref_name == github.event.repository.default_branch
         uses: actions/configure-pages@v5
         with:
           enablement: true
@@ -60,8 +66,11 @@ jobs:
         with:
           path: out
 
+  # Guarded for the same reason: a branch artifact carries no base path, so
+  # publishing one would serve the live site with every asset URL broken.
   deploy:
     needs: build
+    if: github.ref_name == github.event.repository.default_branch
     runs-on: ubuntu-latest
     environment:
       name: github-pages
